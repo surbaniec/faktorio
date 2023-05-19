@@ -8,7 +8,7 @@ const FeatureCard = ({ title, desc }) => {
           style={{ width: '25px', height: 'auto', color: '#fff' }}
         />
       </div>
-      <h3 className='font-bold text-2xl'>{title}</h3>
+      <h3 className='font-bold text-2xl text-zinc-800'>{title}</h3>
       <p className='mt-1'>{desc}</p>
     </div>
   );

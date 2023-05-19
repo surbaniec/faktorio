@@ -5,7 +5,7 @@ import { BsSendFill } from 'react-icons/bs';
 
 const Footer = () => {
   return (
-    <footer className='mt-10 bg-white rounded-lg px-8 py-8 '>
+    <footer className='mt-10 bg-orange-50 rounded-lg px-8 py-8 '>
       <div className='flex flex-col gap-8 md:flex-row md:justify-between'>
         <div className='md:basis-1/3'>
           <h2 className='text-2xl text-gray-900 font-extrabold flex items-center'>
@@ -18,7 +18,7 @@ const Footer = () => {
             />
             Faktorio
           </h2>
-          <p className='mt-4'>
+          <p className='mt-4 text-zinc-500'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
           <div className='flex mt-4 gap-4 text-orange-500 text-xl'>
@@ -36,20 +36,26 @@ const Footer = () => {
         <div className='flex flex-col gap-4 md:basis-1/3'>
           <div>
             <p className='font-bold'>Biuro Obsługi Klienta</p>
-            <a href='tel:123-456-7890'>123-456-7890</a>
+            <a href='tel:123-456-7890' className='text-zinc-500'>
+              123-456-7890
+            </a>
           </div>
           <div>
             <p className='font-bold'>Wsparcie Na Żywo</p>
-            <a href='mailto:support@faktorio.pl'>support@faktorio.pl</a>
+            <a href='mailto:support@faktorio.pl' className='text-zinc-500'>
+              support@faktorio.pl
+            </a>
           </div>
         </div>
         <div className='md:basis-1/3'>
           <h3 className='text-xl font-medium'>Newsletter</h3>
-          <p>Zapisz się do newslettera, aby otrzymywać najnowsze wiadomości</p>
+          <p className='text-zinc-500'>
+            Zapisz się do newslettera, aby otrzymywać najnowsze wiadomości
+          </p>
           <div class='relative flex h-10 w-full min-w-[200px] max-w-[24rem] mt-4'>
             <input
               type='email'
-              class='peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 pr-20 font-sans text-sm font-normal outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200  focus:border-2 focus:border-orange-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50'
+              class='peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 pr-20 font-sans text-sm font-normal outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-orange-200 focus:border-2 focus:border-orange-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50'
               placeholder=' '
               required
             />
@@ -66,8 +72,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='text-center text-gray-500'>
-        <span className='text-xs block mt-8'>
+      <div className='text-center text-zinc-400'>
+        <span className='text-xs block mt-4'>
           &copy; Sebastian Urbaniec. Wszelkie prawa zastrzeżone
         </span>
       </div>

@@ -1,6 +1,11 @@
 import { BsLayersFill } from 'react-icons/bs';
 
-const FeatureCard = ({ title, desc }) => {
+type Props = {
+  title: string;
+  desc: string;
+};
+
+const FeatureCard = ({ title, desc }: Props) => {
   return (
     <div className='bg-white hover:shadow-md duration-200 rounded-lg py-8 px-8 text-left'>
       <div className='bg-orange-500 w-16 h-16 flex justify-center items-center rounded-lg mb-4'>

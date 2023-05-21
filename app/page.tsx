@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Nav from '@/components/Nav';
 import FeatureCard from '@/components/FeatureCard';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
@@ -26,19 +27,7 @@ export default function Home() {
   return (
     <section className='py-8'>
       <header className='flex '>
-        <h1 className='text-3xl text-gray-900 font-extrabold flex items-center'>
-          <Image
-            src={'/assets/icons/invoice.png'}
-            alt='invoice'
-            width={40}
-            height={40}
-            className='mr-3'
-          />
-          Faktorio
-        </h1>
-        <button className='absolute right-5 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full duration-300'>
-          Zaloguj się
-        </button>
+        <Nav />
       </header>
       {/* HERO */}
       <section className='flex flex-col text-center lg:text-left mt-20 md:mt-40 lg:mt-52 lg:flex-row'>
@@ -58,6 +47,7 @@ export default function Home() {
             alt='hero img'
             width={650}
             height={300}
+            priority={true}
           />
         </div>
       </section>

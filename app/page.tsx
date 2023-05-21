@@ -26,7 +26,7 @@ const features = [
 export default function Home() {
   return (
     <section className='py-8'>
-      <header className='flex '>
+      <header>
         <Nav />
       </header>
       {/* HERO */}

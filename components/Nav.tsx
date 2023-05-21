@@ -29,7 +29,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav>
+    <nav className='flex'>
       <h1 className='text-3xl text-gray-900 font-extrabold flex items-center'>
         <Image
           src={'/assets/icons/invoice.png'}

@@ -11,9 +11,11 @@ import {
 } from 'next-auth/react';
 import Image from 'next/image';
 import { BuiltInProviderType } from 'next-auth/providers';
+import { useRouter } from 'next/navigation';
 
 const Nav = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
@@ -27,6 +29,12 @@ const Nav = () => {
     };
     setUpProviders();
   }, []);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/dashboard');
+    }
+  }, [status]);
 
   return (
     <nav className='flex'>

@@ -1,15 +1,23 @@
 'use client';
 
-import { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { HiOutlineUser, HiOutlineCog, HiOutlineLogout } from 'react-icons/hi';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const DashboardNavbar = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [showDropdown, setShowDropdown] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/');
+    }
+  }, [status]);
 
   return (
     <nav className='flex justify-between px-4 py-4 shadow-md bg-white h-20'>
@@ -27,7 +35,9 @@ const DashboardNavbar = () => {
         <IoMdNotificationsOutline className='text-3xl text-zinc-500' />
         <Image
           src={
-            session?.user ? session.user.image! : 'public/assets/icons/user.png'
+            session?.user
+              ? session.user.image!
+              : '/public/assets/icons/user.png'
           }
           width={46}
           height={46}
@@ -54,7 +64,10 @@ const DashboardNavbar = () => {
             <hr />
             <Link
               href=''
-              onClick={() => setShowDropdown(false)}
+              onClick={() => {
+                setShowDropdown(false);
+                signOut();
+              }}
               className='flex items-center text-zinc-500 px-4'
             >
               <HiOutlineLogout className='mr-2' /> Log Out

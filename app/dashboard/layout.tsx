@@ -1,4 +1,5 @@
 import DashboardNavbar from '@/components/DashboardNavbar';
+import DashboardSidebar from '@/components/DashboardSidebar';
 
 export default function RootLayout({
   children,
@@ -8,6 +9,7 @@ export default function RootLayout({
   return (
     <main className='bg-[#F6FAFF]'>
       <DashboardNavbar />
+      <DashboardSidebar />
       {children}
     </main>
   );

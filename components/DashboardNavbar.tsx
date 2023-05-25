@@ -22,6 +22,7 @@ const DashboardNavbar = () => {
     if (status === 'unauthenticated') {
       router.push('/');
     }
+    //eslint-disable-next-line
   }, [status]);
 
   return (

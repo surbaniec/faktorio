@@ -39,16 +39,16 @@ const DashboardNavbar = () => {
       <div className='flex items-center relative gap-4'>
         <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2'></div>
         <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2 animate-ping'></div>
-        <IoMdNotificationsOutline className='text-3xl md:text-4xl text-zinc-500' />
-        <HiOutlineCalendar className='text-3xl md:text-4xl text-zinc-500' />
+        <IoMdNotificationsOutline className='text-3xl md:text-4xl lg:text-3xl text-zinc-500' />
+        <HiOutlineCalendar className='text-3xl md:text-4xl lg:text-3xl text-zinc-500' />
         <Image
           src={
             session?.user
               ? session.user.image!
               : '/public/assets/icons/user.png'
           }
-          width={50}
-          height={50}
+          width={40}
+          height={40}
           alt='profile'
           className='rounded-full'
           onClick={() => setShowDropdown((prev) => !prev)}

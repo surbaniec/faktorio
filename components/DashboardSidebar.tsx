@@ -27,13 +27,14 @@ const DashboardSidebar = () => {
 
   return (
     <>
+      {/* MOBILE SIDEBAR */}
       <div
         className={`absolute top-28 duration-300 ${
           toggleSidebar ? 'left-[305px] md:left-[400px]' : 'left-2'
         }`}
       >
         <button
-          className='relative group'
+          className='relative group lg:hidden'
           onClick={() => setToggleSidebar((prev) => !prev)}
         >
           <div
@@ -77,7 +78,7 @@ const DashboardSidebar = () => {
         </button>
       </div>
       <nav
-        className={`bg-white w-72 md:w-96 rounded-md px-4 pt-8 pb-4 fixed top-24 shadow-md duration-300 ${
+        className={`bg-white w-72 md:w-96 rounded-md px-4 pt-8 pb-4 fixed lg:hidden top-24 shadow-md duration-300 ${
           toggleSidebar ? 'left-0' : 'left-[-1000px]'
         }`}
       >
@@ -127,6 +128,60 @@ const DashboardSidebar = () => {
               się
             </Link>
           </li>
+        </ul>
+      </nav>
+      {/* DESKTOP SIDEBAR */}
+      <nav className='hidden lg:block fixed top-20 bottom-0 bg-white shadow-lg rounded-md rounded-t-none px-4 py-8 w-72'>
+        <ul className='text-lg md:text-lg text-zinc-600 flex flex-col h-full justify-between'>
+          <div className='flex flex-col gap-8'>
+            <li className='bg-indigo-800 text-white rounded-md px-4 py-2'>
+              <Link href='' className='flex items-center '>
+                <AiOutlineDashboard className='text-xl md:text-3xl mr-2' />{' '}
+                Dashboard
+              </Link>
+            </li>
+            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+              <Link href='' className='flex items-center'>
+                <HiOutlineInboxArrowDown className='text-xl md:text-3xl mr-2' />{' '}
+                Skrzynka
+              </Link>
+            </li>
+            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+              <Link href='' className='flex items-center'>
+                <AiOutlineFileSearch className='text-xl md:text-3xl mr-2' />{' '}
+                Wyszukiwarka
+              </Link>
+            </li>
+            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+              <Link href='' className='flex items-center'>
+                <HiOutlineCalendar className='text-xl md:text-3xl mr-2' />{' '}
+                Kalendarz
+              </Link>
+            </li>
+            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+              <Link href='' className='flex items-center'>
+                <HiOutlineUser className='text-xl md:text-3xl mr-2' /> Profil
+              </Link>
+            </li>
+            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+              <Link href='' className='flex items-center'>
+                <HiOutlineCog className='text-xl md:text-3xl mr-2' /> Ustawienia
+              </Link>
+            </li>
+          </div>
+          <div className='flex flex-col gap-4'>
+            <hr />
+            <li className='px-4'>
+              <Link
+                href=''
+                className='flex items-center'
+                onClick={() => signOut()}
+              >
+                <HiOutlineLogout className='text-xl md:text-3xl mr-2' /> Wyloguj
+                się
+              </Link>
+            </li>
+          </div>
         </ul>
       </nav>
     </>

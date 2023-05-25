@@ -25,7 +25,7 @@ const DashboardNavbar = () => {
   }, [status]);
 
   return (
-    <nav className='flex justify-between px-4 py-4 shadow-md bg-white h-20 fixed w-full'>
+    <nav className='col-span-full flex justify-between px-4 py-4 shadow-md bg-white'>
       <h1 className='text-3xl text-gray-900 font-extrabold flex items-center'>
         <Image
           src={'/assets/icons/invoice.png'}

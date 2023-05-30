@@ -7,12 +7,12 @@ const CalendarComponent = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
-    <div className='bg-white mt-10'>
+    <div className='mt-10 md:overflow-auto h-fit'>
       <Calendar
         mode='single'
         selected={date}
         onSelect={setDate}
-        className='rounded-md border'
+        className='rounded-md border bg-white'
       />
     </div>
   );

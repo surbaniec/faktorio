@@ -40,8 +40,8 @@ const DashboardNavbar = () => {
       <div className='flex items-center relative gap-4'>
         <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2'></div>
         <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2 animate-ping'></div>
-        <IoMdNotificationsOutline className='text-3xl md:text-4xl lg:text-3xl text-zinc-500' />
-        <HiOutlineCalendar className='text-3xl md:text-4xl lg:text-3xl text-zinc-500' />
+        <IoMdNotificationsOutline className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer' />
+        <HiOutlineCalendar className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer' />
         <Image
           src={
             session?.user
@@ -51,7 +51,7 @@ const DashboardNavbar = () => {
           width={40}
           height={40}
           alt='profile'
-          className='rounded-full'
+          className='rounded-full cursor-pointer'
           onClick={() => setShowDropdown((prev) => !prev)}
         />
         {showDropdown && (

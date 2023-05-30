@@ -170,7 +170,7 @@ const DashboardSidebar = () => {
             </li>
           </div>
           <div className='flex flex-col gap-4'>
-            <hr />
+            <hr className='mb-4' />
             <li className='px-4'>
               <Link
                 href=''

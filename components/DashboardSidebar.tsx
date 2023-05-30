@@ -131,7 +131,7 @@ const DashboardSidebar = () => {
         </ul>
       </nav>
       {/* DESKTOP SIDEBAR */}
-      <nav className='hidden lg:block bg-white shadow-lg rounded-md rounded-t-none px-4 py-8'>
+      <nav className='hidden lg:block bg-white shadow-md rounded-md rounded-t-none px-4 py-8'>
         <ul className='text-lg md:text-lg text-zinc-600 flex flex-col h-full justify-between'>
           <div className='flex flex-col gap-8'>
             <li className='bg-indigo-800 text-white rounded-md px-4 py-2'>

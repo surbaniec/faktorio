@@ -1,6 +1,7 @@
 import CalendarComponent from '@/components/Calendar';
 import Card from '@/components/Card';
 import ChartWrapper from '@/components/ChartWrapper';
+import CurrencyExchange from '@/components/CurrencyExchange';
 import {
   IoReceiptOutline,
   IoChatbubblesOutline,
@@ -11,7 +12,7 @@ import {
 const Dashboard = () => {
   return (
     <section className='col-span-full lg:col-auto px-4 md:px-10 py-10'>
-      <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center'>
+      <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 justify-center'>
         <Card icon={<IoReceiptOutline />} number={23} text='Liczba faktur' />
         <Card
           icon={<IoThumbsUpOutline />}
@@ -32,6 +33,7 @@ const Dashboard = () => {
           <CalendarComponent />
         </div>
         <ChartWrapper />
+        <CurrencyExchange />
       </div>
     </section>
   );

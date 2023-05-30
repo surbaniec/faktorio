@@ -31,6 +31,10 @@ export const options = {
     title: {
       display: true,
       text: 'Liczba otrzymanych faktur',
+      font: {
+        size: 14,
+        weight: 500,
+      },
     },
   },
 };

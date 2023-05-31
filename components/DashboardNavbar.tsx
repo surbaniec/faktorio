@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { IoMdNotificationsOutline } from 'react-icons/io';
@@ -11,19 +11,11 @@ import {
   HiOutlineCalendar,
 } from 'react-icons/hi';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 const DashboardNavbar = () => {
-  const { data: session, status } = useSession();
+  // required:true => if there is no session, redirect to log in page
+  const { data: session } = useSession({ required: true });
   const [showDropdown, setShowDropdown] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/');
-    }
-    //eslint-disable-next-line
-  }, [status]);
 
   return (
     <nav className='col-span-full flex justify-between px-4 py-4 shadow-md bg-white'>

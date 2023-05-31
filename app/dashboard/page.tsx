@@ -2,6 +2,7 @@ import CalendarComponent from '@/components/Calendar';
 import Card from '@/components/Card';
 import ChartWrapper from '@/components/ChartWrapper';
 import CurrencyExchange from '@/components/CurrencyExchange';
+import { getServerSession } from 'next-auth';
 import {
   IoReceiptOutline,
   IoChatbubblesOutline,
@@ -9,7 +10,16 @@ import {
   IoWarningOutline,
 } from 'react-icons/io5';
 
-const Dashboard = () => {
+import { AuthOptions } from '../api/auth/[...nextauth]/route';
+import { redirect } from 'next/navigation';
+
+const Dashboard = async () => {
+  const session = await getServerSession(AuthOptions);
+
+  if (!session) {
+    redirect('/');
+  }
+
   return (
     <section className='col-span-full lg:col-auto px-4 md:px-10 py-10'>
       <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 justify-center'>

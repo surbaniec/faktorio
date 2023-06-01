@@ -1,7 +1,8 @@
 'use client';
 
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -19,12 +20,12 @@ const Nav = () => {
         Faktorio
       </h1>
       {session?.user ? (
-        <button
+        <Link
+          href='/dashboard'
           className='absolute right-5 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full duration-300'
-          onClick={() => signOut}
         >
-          Wyloguj się
-        </button>
+          Przejdź do panelu
+        </Link>
       ) : (
         <>
           <button

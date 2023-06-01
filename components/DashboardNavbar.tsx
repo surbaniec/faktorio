@@ -47,7 +47,7 @@ const DashboardNavbar = () => {
           onClick={() => setShowDropdown((prev) => !prev)}
         />
         {showDropdown && (
-          <div className='absolute top-20 right-2 w-56 bg-white rounded-md shadow-md py-4 text-lg md:text-2xl flex flex-col gap-4'>
+          <div className='absolute top-20 right-2 w-56 bg-white rounded-md shadow-md py-4 text-lg md:text-2xl flex flex-col gap-4 z-10'>
             <Link
               href=''
               onClick={() => setShowDropdown(false)}

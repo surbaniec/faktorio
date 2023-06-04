@@ -67,7 +67,7 @@ const DashboardNavbar = () => {
               href=''
               onClick={() => {
                 setShowDropdown(false);
-                signOut();
+                signOut({ callbackUrl: '/' });
               }}
               className='flex items-center text-zinc-600 px-4'
             >

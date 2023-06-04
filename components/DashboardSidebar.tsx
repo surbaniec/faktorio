@@ -1,9 +1,8 @@
 'use client';
 
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineDashboard, AiOutlineFileSearch } from 'react-icons/ai';
 import {
   HiOutlineUser,
@@ -14,22 +13,13 @@ import {
 import { HiOutlineInboxArrowDown } from 'react-icons/hi2';
 
 const DashboardSidebar = () => {
-  const { status } = useSession();
   const [toggleSidebar, setToggleSidebar] = useState(false);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/');
-    }
-  }, [status]);
 
   return (
     <>
       {/* MOBILE SIDEBAR */}
       <div
-        className={`absolute top-28 duration-300 ${
+        className={`fixed top-28 duration-300 z-50 ${
           toggleSidebar ? 'left-[305px] md:left-[400px]' : 'left-2'
         }`}
       >
@@ -78,19 +68,19 @@ const DashboardSidebar = () => {
         </button>
       </div>
       <nav
-        className={`bg-white w-72 md:w-96 rounded-md px-4 pt-8 pb-4 fixed lg:hidden top-24 shadow-md duration-300 ${
+        className={`bg-white w-72 md:w-96 rounded-md px-4 pt-8 pb-4 fixed lg:hidden top-24 shadow-md duration-300 z-50 ${
           toggleSidebar ? 'left-0' : 'left-[-1000px]'
         }`}
       >
         <ul className='text-lg md:text-2xl text-zinc-600 flex flex-col gap-4'>
           <li className='bg-indigo-800 text-white rounded-md px-4 py-2'>
-            <Link href='' className='flex items-center '>
+            <Link href='/dashboard' className='flex items-center '>
               <AiOutlineDashboard className='text-xl md:text-3xl mr-2' />{' '}
               Dashboard
             </Link>
           </li>
           <li className='px-4'>
-            <Link href='' className='flex items-center'>
+            <Link href='/dashboard/inbox' className='flex items-center'>
               <HiOutlineInboxArrowDown className='text-xl md:text-3xl mr-2' />{' '}
               Skrzynka
             </Link>
@@ -122,7 +112,7 @@ const DashboardSidebar = () => {
             <Link
               href=''
               className='flex items-center'
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: '/' })}
             >
               <HiOutlineLogout className='text-xl md:text-3xl mr-2' /> Wyloguj
               się
@@ -135,13 +125,13 @@ const DashboardSidebar = () => {
         <ul className='text-lg md:text-lg text-zinc-600 flex flex-col h-full justify-between'>
           <div className='flex flex-col gap-8'>
             <li className='bg-indigo-800 text-white rounded-md px-4 py-2'>
-              <Link href='' className='flex items-center '>
+              <Link href='/dashboard' className='flex items-center '>
                 <AiOutlineDashboard className='text-xl md:text-3xl mr-2' />{' '}
                 Dashboard
               </Link>
             </li>
             <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
-              <Link href='' className='flex items-center'>
+              <Link href='/dashboard/inbox' className='flex items-center'>
                 <HiOutlineInboxArrowDown className='text-xl md:text-3xl mr-2' />{' '}
                 Skrzynka
               </Link>
@@ -175,7 +165,7 @@ const DashboardSidebar = () => {
               <Link
                 href=''
                 className='flex items-center'
-                onClick={() => signOut()}
+                onClick={() => signOut({ callbackUrl: '/' })}
               >
                 <HiOutlineLogout className='text-xl md:text-3xl mr-2' /> Wyloguj
                 się

@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='pl'>
-      <body className={roboto.className}>
+    <html lang='pl' className='overflow-x-hidden'>
+      <body className={`${roboto.className} relative overflow-x-hidden`}>
         <Provider>{children}</Provider>
       </body>
     </html>

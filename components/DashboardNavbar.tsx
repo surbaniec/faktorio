@@ -34,18 +34,17 @@ const DashboardNavbar = () => {
         <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2 animate-ping'></div>
         <IoMdNotificationsOutline className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer' />
         <HiOutlineCalendar className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer' />
-        <Image
-          src={
-            session?.user
-              ? session.user.image!
-              : '/public/assets/icons/user.png'
-          }
-          width={40}
-          height={40}
-          alt='profile'
-          className='rounded-full cursor-pointer'
-          onClick={() => setShowDropdown((prev) => !prev)}
-        />
+        {session?.user && (
+          <Image
+            src={session.user.image!}
+            width={40}
+            height={40}
+            alt='profile'
+            className='rounded-full cursor-pointer'
+            onClick={() => setShowDropdown((prev) => !prev)}
+          />
+        )}
+
         {showDropdown && (
           <div className='absolute top-20 right-2 w-56 bg-white rounded-md shadow-md py-4 text-lg md:text-2xl flex flex-col gap-4 z-10'>
             <Link

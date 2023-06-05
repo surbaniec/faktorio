@@ -17,7 +17,7 @@ async function getData(): Promise<CaseDetails[]> {
   ];
 }
 
-const InboxPage = async () => {
+const SearchPage = async () => {
   const data = await getData();
 
   return (
@@ -27,4 +27,4 @@ const InboxPage = async () => {
   );
 };
 
-export default InboxPage;
+export default SearchPage;

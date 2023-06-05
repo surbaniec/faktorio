@@ -2,6 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { AiOutlineDashboard, AiOutlineFileSearch } from 'react-icons/ai';
 import {
@@ -13,6 +14,7 @@ import {
 import { HiOutlineInboxArrowDown } from 'react-icons/hi2';
 
 const DashboardSidebar = () => {
+  const pathname = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
   return (
@@ -73,20 +75,32 @@ const DashboardSidebar = () => {
         }`}
       >
         <ul className='text-lg md:text-2xl text-zinc-600 flex flex-col gap-4'>
-          <li className='bg-indigo-800 text-white rounded-md px-4 py-2'>
+          <li
+            className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
             <Link href='/dashboard' className='flex items-center '>
               <AiOutlineDashboard className='text-xl md:text-3xl mr-2' />{' '}
               Dashboard
             </Link>
           </li>
-          <li className='px-4'>
+          <li
+            className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard/inbox' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
             <Link href='/dashboard/inbox' className='flex items-center'>
               <HiOutlineInboxArrowDown className='text-xl md:text-3xl mr-2' />{' '}
               Skrzynka
             </Link>
           </li>
-          <li className='px-4'>
-            <Link href='' className='flex items-center'>
+          <li
+            className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
+            <Link href='/dashboard/search' className='flex items-center'>
               <AiOutlineFileSearch className='text-xl md:text-3xl mr-2' />{' '}
               Wyszukiwarka
             </Link>
@@ -124,20 +138,36 @@ const DashboardSidebar = () => {
       <nav className='hidden lg:block bg-white shadow-md rounded-md rounded-t-none px-4 py-8'>
         <ul className='text-lg md:text-lg text-zinc-600 flex flex-col h-full justify-between'>
           <div className='flex flex-col gap-8'>
-            <li className='bg-indigo-800 text-white rounded-md px-4 py-2'>
+            <li
+              className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+                pathname === '/dashboard' ? 'bg-indigo-800 text-white' : ''
+              }`}
+            >
               <Link href='/dashboard' className='flex items-center '>
                 <AiOutlineDashboard className='text-xl md:text-3xl mr-2' />{' '}
                 Dashboard
               </Link>
             </li>
-            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+            <li
+              className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+                pathname === '/dashboard/inbox'
+                  ? 'bg-indigo-800 text-white'
+                  : ''
+              }`}
+            >
               <Link href='/dashboard/inbox' className='flex items-center'>
                 <HiOutlineInboxArrowDown className='text-xl md:text-3xl mr-2' />{' '}
                 Skrzynka
               </Link>
             </li>
-            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
-              <Link href='' className='flex items-center'>
+            <li
+              className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+                pathname === '/dashboard/search'
+                  ? 'bg-indigo-800 text-white'
+                  : ''
+              }`}
+            >
+              <Link href='/dashboard/search' className='flex items-center'>
                 <AiOutlineFileSearch className='text-xl md:text-3xl mr-2' />{' '}
                 Wyszukiwarka
               </Link>

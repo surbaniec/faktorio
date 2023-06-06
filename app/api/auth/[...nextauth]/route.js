@@ -16,6 +16,8 @@ export const AuthOptions = {
         email: session.user.email,
       });
 
+      if (!sessionUser) return;
+
       session.user.id = sessionUser._id.toString();
 
       return session;

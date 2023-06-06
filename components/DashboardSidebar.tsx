@@ -76,7 +76,7 @@ const DashboardSidebar = () => {
       >
         <ul className='text-lg md:text-2xl text-zinc-600 flex flex-col gap-4'>
           <li
-            className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
               pathname === '/dashboard' ? 'bg-indigo-800 text-white' : ''
             }`}
           >
@@ -86,7 +86,7 @@ const DashboardSidebar = () => {
             </Link>
           </li>
           <li
-            className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
               pathname === '/dashboard/inbox' ? 'bg-indigo-800 text-white' : ''
             }`}
           >
@@ -96,7 +96,7 @@ const DashboardSidebar = () => {
             </Link>
           </li>
           <li
-            className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
               pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
             }`}
           >
@@ -105,18 +105,30 @@ const DashboardSidebar = () => {
               Wyszukiwarka
             </Link>
           </li>
-          <li className='px-4'>
+          <li
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
             <Link href='' className='flex items-center'>
               <HiOutlineCalendar className='text-xl md:text-3xl mr-2' />{' '}
               Kalendarz
             </Link>
           </li>
-          <li className='px-4'>
+          <li
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
             <Link href='' className='flex items-center'>
               <HiOutlineUser className='text-xl md:text-3xl mr-2' /> Profil
             </Link>
           </li>
-          <li className='px-4'>
+          <li
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
             <Link href='' className='flex items-center'>
               <HiOutlineCog className='text-xl md:text-3xl mr-2' /> Ustawienia
             </Link>
@@ -135,11 +147,11 @@ const DashboardSidebar = () => {
         </ul>
       </nav>
       {/* DESKTOP SIDEBAR */}
-      <nav className='hidden lg:block bg-white shadow-md rounded-md rounded-t-none px-4 py-8'>
+      <nav className='hidden lg:block bg-white shadow-md rounded-md rounded-t-none px-4 py-8 border-r'>
         <ul className='text-lg md:text-lg text-zinc-600 flex flex-col h-full justify-between'>
           <div className='flex flex-col gap-8'>
             <li
-              className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
                 pathname === '/dashboard' ? 'bg-indigo-800 text-white' : ''
               }`}
             >
@@ -149,7 +161,7 @@ const DashboardSidebar = () => {
               </Link>
             </li>
             <li
-              className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
                 pathname === '/dashboard/inbox'
                   ? 'bg-indigo-800 text-white'
                   : ''
@@ -161,7 +173,7 @@ const DashboardSidebar = () => {
               </Link>
             </li>
             <li
-              className={`hover:bg-indigo-800 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
                 pathname === '/dashboard/search'
                   ? 'bg-indigo-800 text-white'
                   : ''
@@ -172,18 +184,18 @@ const DashboardSidebar = () => {
                 Wyszukiwarka
               </Link>
             </li>
-            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+            <li className='px-4 hover:bg-indigo-700 hover:text-white rounded-md py-2 duration-200'>
               <Link href='' className='flex items-center'>
                 <HiOutlineCalendar className='text-xl md:text-3xl mr-2' />{' '}
                 Kalendarz
               </Link>
             </li>
-            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+            <li className='px-4 hover:bg-indigo-700 hover:text-white rounded-md py-2 duration-200'>
               <Link href='' className='flex items-center'>
                 <HiOutlineUser className='text-xl md:text-3xl mr-2' /> Profil
               </Link>
             </li>
-            <li className='px-4 hover:bg-indigo-800 hover:text-white rounded-md py-2 duration-200'>
+            <li className='px-4 hover:bg-indigo-700 hover:text-white rounded-md py-2 duration-200'>
               <Link href='' className='flex items-center'>
                 <HiOutlineCog className='text-xl md:text-3xl mr-2' /> Ustawienia
               </Link>

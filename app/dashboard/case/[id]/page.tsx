@@ -7,6 +7,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { useState } from 'react';
 import { IoReceiptOutline, IoChatbubblesOutline } from 'react-icons/io5';
 import { AiOutlineMail } from 'react-icons/ai';
+import { BsFillSendFill, BsInfoCircle } from 'react-icons/bs';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
@@ -44,8 +45,8 @@ const CaseDetailsPage = () => {
             className='flex flex-col gap-2 text-zinc-600
         '
           >
-            <h2 className='font-bold text-xl text-zinc-700'>
-              Case 1 - szczegóły
+            <h2 className='font-bold text-xl text-zinc-700 flex items-center'>
+              Case 1 - Szczegóły <BsInfoCircle className='ml-2' />
             </h2>
             <div className='flex items-center text-lg mt-4'>
               <IoReceiptOutline className='text-xl' />{' '}
@@ -64,7 +65,9 @@ const CaseDetailsPage = () => {
         </div>
         {/* Comments */}
         <div className='bg-white rounded-md border px-4 md:px-8 py-4'>
-          <h2 className='font-bold text-xl text-zinc-700'>Komentarze</h2>
+          <h2 className='font-bold text-xl text-zinc-700 flex items-center'>
+            Komentarze <IoChatbubblesOutline className='ml-2' />
+          </h2>
           <div className='flex flex-col mt-4 gap-4'>
             <div className='flex items-center'>
               {session?.user ? (
@@ -119,6 +122,39 @@ const CaseDetailsPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        {/* ACTIONS */}
+        <div className='bg-white border rounded-md px-4 py-4'>
+          <form method='post' className='flex flex-col items-start gap-4'>
+            <select
+              name='reason'
+              id='reason'
+              className='border rounded-md px-2 py-2'
+              required
+            >
+              <option value='#' selected disabled>
+                Wybierz status
+              </option>
+              <option value='approve'>Zatwierdź</option>
+              <option value='reject'>Odrzuć</option>
+              <option value='pending'>Brak wystarczających informacji</option>
+            </select>
+            <textarea
+              name='comment'
+              id='comment'
+              cols={30}
+              rows={6}
+              placeholder='Dodaj komentarz...'
+              required
+              className='w-full px-2 py-2 border rounded-md'
+            ></textarea>
+            <button
+              type='submit'
+              className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center'
+            >
+              Wyślij <BsFillSendFill className='ml-2' />
+            </button>
+          </form>
         </div>
       </div>
 

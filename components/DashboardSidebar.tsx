@@ -20,11 +20,7 @@ const DashboardSidebar = () => {
   return (
     <>
       {/* MOBILE SIDEBAR */}
-      <div
-        className={`fixed top-28 duration-300 z-50 ${
-          toggleSidebar ? 'left-[305px] md:left-[400px]' : 'left-2'
-        }`}
-      >
+      <div className='fixed bottom-10 duration-300 z-50 left-4'>
         <button
           className='relative group lg:hidden'
           onClick={() => setToggleSidebar((prev) => !prev)}

@@ -20,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='pl' className='overflow-x-hidden'>
-      <body className={`${roboto.className} relative overflow-x-hidden`}>
+      <body
+        className={`${roboto.className} relative overflow-x-hidden`}
+        suppressHydrationWarning={true}
+      >
         <Provider>{children}</Provider>
       </body>
     </html>

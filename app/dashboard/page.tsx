@@ -13,8 +13,21 @@ import {
 import { AuthOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 
+async function getData() {
+  const res = await fetch(
+    'http://api.nbp.pl/api/exchangerates/rates/a/eur/?format=json'
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
 const Dashboard = async () => {
   const session = await getServerSession(AuthOptions);
+
+  const data = await getData();
 
   if (!session) {
     redirect('/');
@@ -43,7 +56,7 @@ const Dashboard = async () => {
           <CalendarComponent />
         </div>
         <ChartWrapper />
-        <CurrencyExchange />
+        <CurrencyExchange currencyEx={data.rates[0].mid} />
       </div>
     </section>
   );

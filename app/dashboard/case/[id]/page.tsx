@@ -129,7 +129,7 @@ const CaseDetailsPage = () => {
             <select
               name='reason'
               id='reason'
-              className='border rounded-md px-2 py-2'
+              className='border rounded-md px-2 py-2 w-full md:w-fit'
               required
             >
               <option value='#' selected disabled>

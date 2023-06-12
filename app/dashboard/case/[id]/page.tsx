@@ -125,14 +125,15 @@ const CaseDetailsPage = () => {
         </div>
         {/* ACTIONS */}
         <div className='bg-white border rounded-md px-4 py-4'>
-          <form method='post' className='flex flex-col items-start gap-4'>
+          <form className='flex flex-col items-start gap-4'>
             <select
               name='reason'
               id='reason'
               className='border rounded-md px-2 py-2 w-full md:w-fit'
               required
+              defaultValue={'DEFAULT'}
             >
-              <option value='#' selected disabled>
+              <option value='DEFAULT' disabled>
                 Wybierz status
               </option>
               <option value='approve'>Zatwierdź</option>

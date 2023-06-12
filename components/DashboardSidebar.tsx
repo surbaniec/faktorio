@@ -4,7 +4,11 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { AiOutlineDashboard, AiOutlineFileSearch } from 'react-icons/ai';
+import {
+  AiOutlineDashboard,
+  AiOutlineFileSearch,
+  AiOutlineFileAdd,
+} from 'react-icons/ai';
 import {
   HiOutlineUser,
   HiOutlineCog,
@@ -106,6 +110,16 @@ const DashboardSidebar = () => {
               pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
             }`}
           >
+            <Link href='/dashboard/add-invoice' className='flex items-center'>
+              <AiOutlineFileAdd className='text-xl md:text-3xl mr-2' /> Dodaj
+              fakturę
+            </Link>
+          </li>
+          <li
+            className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
+              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+            }`}
+          >
             <Link href='' className='flex items-center'>
               <HiOutlineCalendar className='text-xl md:text-3xl mr-2' />{' '}
               Kalendarz
@@ -178,6 +192,18 @@ const DashboardSidebar = () => {
               <Link href='/dashboard/search' className='flex items-center'>
                 <AiOutlineFileSearch className='text-xl md:text-3xl mr-2' />{' '}
                 Wyszukiwarka
+              </Link>
+            </li>
+            <li
+              className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
+                pathname === '/dashboard/search'
+                  ? 'bg-indigo-800 text-white'
+                  : ''
+              }`}
+            >
+              <Link href='/dashboard/add-invoice' className='flex items-center'>
+                <AiOutlineFileAdd className='text-xl md:text-3xl mr-2' /> Dodaj
+                fakturę
               </Link>
             </li>
             <li className='px-4 hover:bg-indigo-700 hover:text-white rounded-md py-2 duration-200'>

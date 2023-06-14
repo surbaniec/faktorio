@@ -19,10 +19,20 @@ const AddInvoice = () => {
     setPdfFile(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    //TODO: Prześlij fakturę do bazy danych
+    if (!pdfFile) {
+      console.error('PDF File not selected');
+      return;
+    }
+
+    if (!invoiceNumber) {
+      console.error('Please enter invoice number');
+      return;
+    }
+
+    //TODO: FETCH API
 
     setInvoiceNumber('');
     setPdfFile(null);

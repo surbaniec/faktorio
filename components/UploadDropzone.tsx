@@ -10,7 +10,7 @@ export const OurUploadDropzone = ({ invoiceNumber }: Props) => {
   const { data: session } = useSession();
   return (
     <UploadDropzone<OurFileRouter>
-      endpoint='imgUploader'
+      endpoint='blobUploader'
       onClientUploadComplete={(res) => {
         if (res !== undefined) {
           // Do something with the response

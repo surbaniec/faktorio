@@ -5,16 +5,16 @@ const CaseSchema = new Schema({
     type: String,
     required: [true, 'Invoice Number is required'],
   },
-  invoiceFile: {
-    data: Buffer,
-    contentType: String,
+  fileUrl: {
+    type: String,
+    required: true,
   },
-  sender: {
+  senderId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
 });
 
-const Case = models.Case || model('Case', CaseSchema);
+const CaseModel = models.Case || model('Case', CaseSchema);
 
-export default Case;
+export default CaseModel;

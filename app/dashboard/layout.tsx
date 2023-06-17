@@ -1,5 +1,6 @@
 import DashboardNavbar from '@/components/DashboardNavbar';
 import DashboardSidebar from '@/components/DashboardSidebar';
+import '@uploadthing/react/styles.css';
 
 export default function RootLayout({
   children,

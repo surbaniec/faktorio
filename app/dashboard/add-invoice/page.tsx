@@ -1,74 +1,24 @@
 'use client';
 
+import { OurUploadDropzone } from '@/components/UploadDropzone';
 import { useState } from 'react';
-import { BsFillSendFill } from 'react-icons/bs';
 
 const AddInvoice = () => {
-  const [invoiceNumber, setInvoiceNumber] = useState('');
-  const [pdfFile, setPdfFile] = useState<File | null>(null);
-
-  const handleInvoiceNumberChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setInvoiceNumber(e.target.value);
-  };
-
-  const handlePdfFileChange = (e: React.ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    const file: File = (target.files as FileList)[0];
-    setPdfFile(file);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!pdfFile) {
-      console.error('PDF File not selected');
-      return;
-    }
-
-    if (!invoiceNumber) {
-      console.error('Please enter invoice number');
-      return;
-    }
-
-    //TODO: FETCH API
-
-    setInvoiceNumber('');
-    setPdfFile(null);
-  };
+  const [invoiceNumber, setInvoiceNumber] = useState<string>('');
 
   return (
-    <section className='px-4 py-10 bg-white border rounded-md mx-4 md:mx-10 my-4 md:my-10 h-fit'>
-      <form
-        className='flex flex-col items-center gap-4'
-        onSubmit={handleSubmit}
-      >
+    <section className='flex flex-col gap-2 px-4 py-10 bg-white border rounded-md mx-4 md:mx-10 my-4 md:my-10 h-fit'>
+      <div>
         <input
           type='text'
-          id='invoiceNumber'
-          name='invoiceNumber'
-          placeholder='Numer faktury'
-          className='border rounded-md px-2 py-2'
+          placeholder='Podaj numer faktury...'
           value={invoiceNumber}
-          onChange={handleInvoiceNumberChange}
+          onChange={(e) => setInvoiceNumber(e.target.value)}
+          className='border rounded-md w-full px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600'
           required
         />
-        <input
-          type='file'
-          id='pdfFile'
-          name='pdfFile'
-          accept='application/pdf,.csv'
-          onChange={handlePdfFileChange}
-          required
-        ></input>
-        <button
-          type='submit'
-          className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center'
-        >
-          Wyślij <BsFillSendFill className='ml-2' />
-        </button>
-      </form>
+      </div>
+      {invoiceNumber && <OurUploadDropzone invoiceNumber={invoiceNumber} />}
     </section>
   );
 };

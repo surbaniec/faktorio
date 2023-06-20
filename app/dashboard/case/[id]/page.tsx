@@ -10,6 +10,7 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { BsFillSendFill, BsInfoCircle } from 'react-icons/bs';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -19,14 +20,27 @@ type CaseDetails = {
   fileUrl: string;
   statusType: string;
   email: string;
-  comments: [];
+  comments:
+    | [
+        {
+          image: string;
+          name: string;
+          msg: string;
+          date: string;
+        }
+      ]
+    | null;
 };
 
-const CaseDetailsPage = ({ params }: { params: { slug: string } }) => {
+const CaseDetailsPage = () => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [message, setMessage] = useState<string>('');
   const [status, setStatus] = useState<string>('');
+
+  const { data: session } = useSession({ required: true });
+  const pathname = usePathname();
+  const pathId = pathname.slice(pathname.lastIndexOf('/') + 1);
 
   const [caseDetails, setCaseDetails] = useState<CaseDetails>({
     id: '',
@@ -34,12 +48,30 @@ const CaseDetailsPage = ({ params }: { params: { slug: string } }) => {
     fileUrl: '',
     statusType: '',
     email: '',
-    comments: [],
+    comments: null,
   });
 
-  useEffect(() => {}, [params.slug]);
+  useEffect(() => {
+    const getCaseDetails = async () => {
+      const res = await fetch(`http://localhost:3000/api/case/${pathId}`);
+      const data = await res.json();
 
-  const { data: session } = useSession({ required: true });
+      const { _id, invoiceNumber, fileUrl, statusType, email, comments } = data;
+
+      setCaseDetails({
+        id: _id,
+        invoiceNumber,
+        fileUrl,
+        statusType,
+        email,
+        comments,
+      });
+    };
+
+    getCaseDetails();
+
+    //eslint-disable-next-line
+  }, [pathId]);
 
   function onDocumentLoadSuccess({ numPages }: PDFDocumentProxy) {
     setNumPages(numPages);
@@ -68,20 +100,21 @@ const CaseDetailsPage = ({ params }: { params: { slug: string } }) => {
         '
           >
             <h2 className='font-bold text-xl text-zinc-700 flex items-center'>
-              Case 1 - Szczegóły <BsInfoCircle className='ml-2' />
+              Case {caseDetails.id} - Szczegóły{' '}
+              <BsInfoCircle className='ml-2' />
             </h2>
             <div className='flex items-center text-lg mt-4'>
               <IoReceiptOutline className='text-xl' />{' '}
-              <span className='ml-2'>12/04/2023</span>
+              <span className='ml-2'>{caseDetails.invoiceNumber}</span>
             </div>
             <div className='flex items-center text-lg'>
               <AiOutlineMail className='text-xl' />{' '}
-              <span className='ml-2'>sender@email.com</span>
+              <span className='ml-2'>{caseDetails.email}</span>
             </div>
             <div className='flex items-center text-lg bg-orange-100 text-orange-400 rounded-full px-2 py-[2px] relative w-fit'>
               <div className='absolute bg-orange-400 block rounded-full w-2 h-2'></div>
               <div className='absolute bg-orange-400 block rounded-full w-2 h-2 animate-ping'></div>
-              <span className='ml-4'>Oczekujące</span>
+              <span className='ml-4'>{caseDetails.statusType}</span>
             </div>
           </div>
         </div>
@@ -91,58 +124,27 @@ const CaseDetailsPage = ({ params }: { params: { slug: string } }) => {
             Komentarze <IoChatbubblesOutline className='ml-2' />
           </h2>
           <div className='flex flex-col mt-4 gap-4'>
-            <div className='flex items-center'>
-              {session?.user ? (
-                <Image
-                  src={session.user.image!}
-                  width={40}
-                  height={40}
-                  alt='profile'
-                  className='rounded-full cursor-pointer'
-                />
-              ) : (
-                <Image
-                  src='/assets/icons/user.png'
-                  width={40}
-                  height={40}
-                  alt='profile'
-                  className='rounded-full cursor-pointer'
-                />
-              )}
-              <div className='ml-4'>
-                <p className='font-medium'>{session?.user?.name}</p>
-                <span className='text-zinc-500'>Lorem ipsum dolor sit.</span>
-                <span className='text-xs text-zinc-400 ml-2'>12.03.2023</span>
-              </div>
-            </div>
-            <div className='flex items-center'>
-              {session?.user ? (
-                <Image
-                  src={session.user.image!}
-                  width={40}
-                  height={40}
-                  alt='profile'
-                  className='rounded-full cursor-pointer'
-                />
-              ) : (
-                <Image
-                  src='/assets/icons/user.png'
-                  width={40}
-                  height={40}
-                  alt='profile'
-                  className='rounded-full cursor-pointer'
-                />
-              )}
-              <div className='ml-4'>
-                <p className='font-medium'>{session?.user?.name}</p>
-                <span className='text-zinc-500'>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Libero, id itaque explicabo inventore repudiandae beatae
-                  fugiat quod qui nostrum alias.
-                </span>
-                <span className='text-xs text-zinc-400 ml-2'>12.03.2023</span>
-              </div>
-            </div>
+            {caseDetails.comments &&
+              caseDetails.comments.map((comment, i) => {
+                return (
+                  <div className='flex items-center' key={i}>
+                    <Image
+                      src={comment.image}
+                      width={40}
+                      height={40}
+                      alt='profile'
+                      className='rounded-full cursor-pointer'
+                    />
+                    <div className='ml-4'>
+                      <p className='font-medium'>{comment.name}</p>
+                      <span className='text-zinc-500'>{comment.msg}</span>
+                      <span className='text-xs text-zinc-400 ml-2'>
+                        {new Date(+comment.date).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
         {/* ACTIONS */}
@@ -187,7 +189,7 @@ const CaseDetailsPage = ({ params }: { params: { slug: string } }) => {
       {/* PDF */}
       <div className='rounded-md md:mx-auto lg:flex lg:flex-col lg:basis-3/5'>
         <Document
-          file={`/assets/test.pdf`}
+          file={caseDetails.fileUrl}
           renderMode='canvas'
           error='Nie udało się załadować pliku.'
           onLoadSuccess={onDocumentLoadSuccess}

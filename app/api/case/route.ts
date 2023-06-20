@@ -24,6 +24,10 @@ export async function POST(request: NextRequest) {
     const fileUrl = formData.get('fileUrl');
     const statusType = formData.get('statusType');
     const senderId = formData.get('senderId');
+    const image = formData.get('image');
+    const name = formData.get('name');
+    const msg = formData.get('msg');
+    const date = formData.get('date');
 
     //Find user
     const user = await Users.findOne({ id: senderId });
@@ -34,6 +38,14 @@ export async function POST(request: NextRequest) {
       statusType,
       senderId,
       email: user.email,
+      comments: [
+        {
+          image,
+          name,
+          msg,
+          date,
+        },
+      ],
     });
 
     await newCase.save();

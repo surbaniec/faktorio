@@ -21,6 +21,10 @@ const CaseSchema = new Schema({
     type: String,
     required: true,
   },
+  comments: {
+    type: Array,
+    required: true,
+  },
 });
 
 const Case = models.Case || model('Case', CaseSchema);

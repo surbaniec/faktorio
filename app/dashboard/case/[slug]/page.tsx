@@ -4,7 +4,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoReceiptOutline, IoChatbubblesOutline } from 'react-icons/io5';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsFillSendFill, BsInfoCircle } from 'react-icons/bs';
@@ -13,9 +13,31 @@ import Image from 'next/image';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-const CaseDetailsPage = () => {
+type CaseDetails = {
+  id: string;
+  invoiceNumber: string;
+  fileUrl: string;
+  statusType: string;
+  email: string;
+  comments: [];
+};
+
+const CaseDetailsPage = ({ params }: { params: { slug: string } }) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [message, setMessage] = useState<string>('');
+  const [status, setStatus] = useState<string>('');
+
+  const [caseDetails, setCaseDetails] = useState<CaseDetails>({
+    id: '',
+    invoiceNumber: '',
+    fileUrl: '',
+    statusType: '',
+    email: '',
+    comments: [],
+  });
+
+  useEffect(() => {}, [params.slug]);
 
   const { data: session } = useSession({ required: true });
 
@@ -131,9 +153,10 @@ const CaseDetailsPage = () => {
               id='reason'
               className='border rounded-md px-2 py-2 w-full md:w-fit'
               required
-              defaultValue={'DEFAULT'}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
             >
-              <option value='DEFAULT' disabled>
+              <option value='' disabled>
                 Wybierz status
               </option>
               <option value='approve'>Zatwierdź</option>
@@ -146,8 +169,10 @@ const CaseDetailsPage = () => {
               cols={30}
               rows={6}
               placeholder='Dodaj komentarz...'
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               required
-              className='w-full px-2 py-2 border rounded-md'
+              className='w-full px-2 py-2 border rounded-md focus:outline-indigo-800'
             ></textarea>
             <button
               type='submit'

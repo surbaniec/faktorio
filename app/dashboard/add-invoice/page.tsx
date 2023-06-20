@@ -1,5 +1,7 @@
 'use client';
 
+import '@uploadthing/react/styles.css';
+
 import { OurUploadDropzone } from '@/components/UploadDropzone';
 import { useState } from 'react';
 

@@ -17,16 +17,14 @@ import {
 export type CaseDetails = {
   caseId: string;
   invoiceNumber: string;
-  email: string;
-  amount: number;
-  currency: string;
-  dueDate: string;
-  status: 'oczekujące' | 'procesowanie' | 'opłacone' | 'przeterminowane';
+  fileUrl: string;
+  statusType: string;
+  senderId: string;
 };
 
 export const columns: ColumnDef<CaseDetails>[] = [
   {
-    accessorKey: 'caseId',
+    accessorKey: '_id',
     header: 'Case ID',
   },
   {
@@ -34,7 +32,7 @@ export const columns: ColumnDef<CaseDetails>[] = [
     header: 'Numer faktury',
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'statusType',
     header: 'Status',
   },
   {

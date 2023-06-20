@@ -9,12 +9,20 @@ const CaseSchema = new Schema({
     type: String,
     required: true,
   },
+  statusType: {
+    type: String,
+    required: true,
+  },
   senderId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
-const CaseModel = models.Case || model('Case', CaseSchema);
+const Case = models.Case || model('Case', CaseSchema);
 
-export default CaseModel;
+export default Case;

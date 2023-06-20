@@ -19,6 +19,7 @@ export const OurUploadDropzone = ({ invoiceNumber }: Props) => {
           const formData = new FormData();
           formData.append('invoiceNumber', invoiceNumber);
           formData.append('fileUrl', res[0].fileUrl);
+          formData.append('statusType', 'oczekujące');
           formData.append('senderId', session?.user?.id);
 
           fetch('http://localhost:3000/api/case', {

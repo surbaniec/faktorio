@@ -1,20 +1,12 @@
-import { CaseDetails, columns } from '@/components/DataTableColumns';
+import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
 
-async function getData(): Promise<CaseDetails[]> {
-  //TODO: FETCH DATA FROM API HERE
-  return [
-    {
-      caseId: '1',
-      invoiceNumber: '12/04/2023',
-      email: 'sender@email.com',
-      amount: 199,
-      currency: 'PLN',
-      dueDate: '12.07.2023',
-      status: 'oczekujące',
-    },
-    // ...
-  ];
+async function getData() {
+  const res = await fetch('http://localhost:3000/api/case', {
+    next: { revalidate: 10 },
+  });
+
+  return res.json();
 }
 
 const SearchPage = async () => {

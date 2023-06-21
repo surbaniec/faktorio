@@ -12,10 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 // This type is used to define the shape of our data.
 export type CaseDetails = {
-  caseId: string;
+  _id: string;
   invoiceNumber: string;
   fileUrl: string;
   statusType: string;
@@ -52,8 +53,6 @@ export const columns: ColumnDef<CaseDetails>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
-      const payment = row.original;
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -63,14 +62,18 @@ export const columns: ColumnDef<CaseDetails>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Działanie</DropdownMenuLabel>
+            <DropdownMenuLabel>Wykonaj działanie</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.caseId)}
+              onClick={() => navigator.clipboard.writeText(row.original._id)}
             >
               Skopiuj case ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Otwórz szczegóły</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/dashboard/case/${row.original._id}`}>
+                Otwórz szczegóy
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

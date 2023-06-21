@@ -198,11 +198,27 @@ const CaseDetailsPage = () => {
               <AiOutlineMail className='text-xl' />{' '}
               <span className='ml-2'>{caseDetails.email}</span>
             </div>
-            <div className='flex items-center text-lg bg-orange-100 text-orange-400 rounded-full px-2 py-[2px] relative w-fit'>
-              <div className='absolute bg-orange-400 block rounded-full w-2 h-2'></div>
-              <div className='absolute bg-orange-400 block rounded-full w-2 h-2 animate-ping'></div>
-              <span className='ml-4'>{caseDetails.statusType}</span>
-            </div>
+            {caseDetails.statusType === 'oczekujące' && (
+              <div className='flex items-center text-lg bg-orange-100 text-orange-400 rounded-full px-2 py-[2px] relative w-fit'>
+                <div className='absolute bg-orange-400 block rounded-full w-2 h-2'></div>
+                <div className='absolute bg-orange-400 block rounded-full w-2 h-2 animate-ping'></div>
+                <span className='ml-4'>{caseDetails.statusType}</span>
+              </div>
+            )}
+            {caseDetails.statusType === 'zatwierdzono' && (
+              <div className='flex items-center text-lg bg-green-100 text-green-400 rounded-full px-2 py-[2px] relative w-fit'>
+                <div className='absolute bg-green-400 block rounded-full w-2 h-2'></div>
+                <div className='absolute bg-green-400 block rounded-full w-2 h-2 animate-ping'></div>
+                <span className='ml-4'>{caseDetails.statusType}</span>
+              </div>
+            )}
+            {caseDetails.statusType === 'odrzucono' && (
+              <div className='flex items-center text-lg bg-red-100 text-red-400 rounded-full px-2 py-[2px] relative w-fit'>
+                <div className='absolute bg-red-400 block rounded-full w-2 h-2'></div>
+                <div className='absolute bg-red-400 block rounded-full w-2 h-2 animate-ping'></div>
+                <span className='ml-4'>{caseDetails.statusType}</span>
+              </div>
+            )}
           </div>
         </div>
         {/* Comments */}

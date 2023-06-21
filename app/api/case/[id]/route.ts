@@ -1,4 +1,5 @@
 import Case from '@/models/case';
+import { ObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -11,4 +12,12 @@ export async function GET(request: Request) {
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
+}
+
+export async function PUT(request: Request) {
+  const res = await request.json();
+
+  const id = res._id as ObjectId;
+
+  await Case.findByIdAndUpdate({ _id: id }, res);
 }

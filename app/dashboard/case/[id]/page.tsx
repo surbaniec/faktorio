@@ -11,25 +11,25 @@ import { BsFillSendFill, BsInfoCircle } from 'react-icons/bs';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 type CaseDetails = {
-  id: string;
+  _id: string;
   invoiceNumber: string;
   fileUrl: string;
   statusType: string;
+  senderId: string;
   email: string;
-  comments:
-    | [
-        {
-          image: string;
-          name: string;
-          msg: string;
-          date: string;
-        }
-      ]
-    | null;
+  comments: comments[];
+};
+
+type comments = {
+  image: string;
+  name: string;
+  msg: string;
+  date: string;
 };
 
 const CaseDetailsPage = () => {
@@ -40,16 +40,19 @@ const CaseDetailsPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
+  const { data: session } = useSession();
+
   const pathname = usePathname();
   const pathId = pathname.slice(pathname.lastIndexOf('/') + 1);
 
   const [caseDetails, setCaseDetails] = useState<CaseDetails>({
-    id: '',
+    _id: '',
     invoiceNumber: '',
     fileUrl: '',
     statusType: '',
+    senderId: '',
     email: '',
-    comments: null,
+    comments: [{ image: '', name: '', msg: '', date: '' }],
   });
 
   useEffect(() => {
@@ -64,14 +67,22 @@ const CaseDetailsPage = () => {
           setError(true);
         }
 
-        const { _id, invoiceNumber, fileUrl, statusType, email, comments } =
-          data;
-
-        setCaseDetails({
-          id: _id,
+        const {
+          _id,
           invoiceNumber,
           fileUrl,
           statusType,
+          senderId,
+          email,
+          comments,
+        } = data;
+
+        setCaseDetails({
+          _id: _id,
+          invoiceNumber,
+          fileUrl,
+          statusType,
+          senderId,
           email,
           comments,
         });
@@ -85,6 +96,54 @@ const CaseDetailsPage = () => {
 
     //eslint-disable-next-line
   }, [pathId]);
+
+  const addComment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!message || !status || !session?.user) {
+      return;
+    }
+
+    const newComment: comments = {
+      image: session.user.image!.toString(),
+      name: session.user.name!.toString(),
+      msg: message,
+      date: Date.now().toString(),
+    };
+
+    const editedCase: CaseDetails = {
+      _id: caseDetails._id,
+      invoiceNumber: caseDetails.invoiceNumber,
+      fileUrl: caseDetails.fileUrl,
+      statusType: status,
+      senderId: caseDetails.senderId,
+      email: caseDetails.email,
+      comments: [...caseDetails.comments, newComment],
+    };
+
+    try {
+      await fetch(`http://localhost:3000/api/case/${pathId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(editedCase),
+      });
+
+      setMessage('');
+      setStatus('');
+      setCaseDetails({
+        _id: caseDetails._id,
+        invoiceNumber: caseDetails.invoiceNumber,
+        fileUrl: caseDetails.fileUrl,
+        statusType: status,
+        senderId: caseDetails.senderId,
+        email: caseDetails.email,
+        comments: [...caseDetails.comments, newComment],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function onDocumentLoadSuccess({ numPages }: PDFDocumentProxy) {
     setNumPages(numPages);
@@ -128,7 +187,7 @@ const CaseDetailsPage = () => {
         '
           >
             <h2 className='font-bold text-xl text-zinc-700 flex items-center'>
-              Case {caseDetails.id} - Szczegóły{' '}
+              Case {caseDetails._id} - Szczegóły{' '}
               <BsInfoCircle className='ml-2' />
             </h2>
             <div className='flex items-center text-lg mt-4'>
@@ -151,7 +210,7 @@ const CaseDetailsPage = () => {
           <h2 className='font-bold text-xl text-zinc-700 flex items-center'>
             Komentarze <IoChatbubblesOutline className='ml-2' />
           </h2>
-          <div className='flex flex-col mt-4 gap-4'>
+          <div className='flex flex-col mt-4 gap-4 max-h-60 overflow-y-scroll'>
             {caseDetails.comments &&
               caseDetails.comments.map((comment, i) => {
                 return (
@@ -177,7 +236,10 @@ const CaseDetailsPage = () => {
         </div>
         {/* ACTIONS */}
         <div className='bg-white border rounded-md px-4 py-4'>
-          <form className='flex flex-col items-start gap-4'>
+          <form
+            className='flex flex-col items-start gap-4'
+            onSubmit={addComment}
+          >
             <select
               name='reason'
               id='reason'

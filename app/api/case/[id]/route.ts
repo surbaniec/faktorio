@@ -15,9 +15,14 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const res = await request.json();
+  try {
+    const res = await request.json();
+    const id = res._id as ObjectId;
 
-  const id = res._id as ObjectId;
+    await Case.findByIdAndUpdate({ _id: id }, res);
 
-  await Case.findByIdAndUpdate({ _id: id }, res);
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
 }

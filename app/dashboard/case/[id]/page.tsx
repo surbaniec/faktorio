@@ -235,45 +235,49 @@ const CaseDetailsPage = () => {
           </div>
         </div>
         {/* ACTIONS */}
-        <div className='bg-white border rounded-md px-4 py-4'>
-          <form
-            className='flex flex-col items-start gap-4'
-            onSubmit={addComment}
-          >
-            <select
-              name='reason'
-              id='reason'
-              className='border rounded-md px-2 py-2 w-full md:w-fit'
-              required
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
+        {caseDetails.statusType === 'oczekujące' && (
+          <div className='bg-white border rounded-md px-4 py-4'>
+            <form
+              className='flex flex-col items-start gap-4'
+              onSubmit={addComment}
             >
-              <option value='' disabled>
-                Wybierz status
-              </option>
-              <option value='approve'>Zatwierdź</option>
-              <option value='reject'>Odrzuć</option>
-              <option value='pending'>Brak wystarczających informacji</option>
-            </select>
-            <textarea
-              name='comment'
-              id='comment'
-              cols={30}
-              rows={6}
-              placeholder='Dodaj komentarz...'
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-              className='w-full px-2 py-2 border rounded-md focus:outline-indigo-800'
-            ></textarea>
-            <button
-              type='submit'
-              className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center'
-            >
-              Wyślij <BsFillSendFill className='ml-2' />
-            </button>
-          </form>
-        </div>
+              <select
+                name='reason'
+                id='reason'
+                className='border rounded-md px-2 py-2 w-full md:w-fit'
+                required
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value='' disabled>
+                  Wybierz status
+                </option>
+                <option value='zatwierdzono'>Zatwierdź</option>
+                <option value='odrzucono'>Odrzuć</option>
+                <option value='oczekujące'>
+                  Brak wystarczających informacji
+                </option>
+              </select>
+              <textarea
+                name='comment'
+                id='comment'
+                cols={30}
+                rows={6}
+                placeholder='Dodaj komentarz...'
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+                className='w-full px-2 py-2 border rounded-md focus:outline-indigo-800'
+              ></textarea>
+              <button
+                type='submit'
+                className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center'
+              >
+                Wyślij <BsFillSendFill className='ml-2' />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
 
       {/* PDF */}

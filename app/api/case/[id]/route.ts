@@ -5,11 +5,7 @@ export async function GET(request: Request) {
   const id = request.url.slice(request.url.lastIndexOf('/') + 1);
 
   try {
-    const matchedCase = await Case.findOne({ id });
-
-    if (!matchedCase) {
-      return NextResponse.json({ msg: `No case with id: ${id}` });
-    }
+    const matchedCase = await Case.findOne({ _id: id });
 
     return NextResponse.json(matchedCase);
   } catch (error) {

@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react';
 import { IoReceiptOutline, IoChatbubblesOutline } from 'react-icons/io5';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsFillSendFill, BsInfoCircle } from 'react-icons/bs';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -37,8 +37,9 @@ const CaseDetailsPage = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [message, setMessage] = useState<string>('');
   const [status, setStatus] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
-  const { data: session } = useSession({ required: true });
   const pathname = usePathname();
   const pathId = pathname.slice(pathname.lastIndexOf('/') + 1);
 
@@ -53,19 +54,31 @@ const CaseDetailsPage = () => {
 
   useEffect(() => {
     const getCaseDetails = async () => {
-      const res = await fetch(`http://localhost:3000/api/case/${pathId}`);
-      const data = await res.json();
+      setLoading(true);
+      setError(false);
+      try {
+        const res = await fetch(`http://localhost:3000/api/case/${pathId}`);
+        const data = await res.json();
 
-      const { _id, invoiceNumber, fileUrl, statusType, email, comments } = data;
+        if (res.status === 500) {
+          setError(true);
+        }
 
-      setCaseDetails({
-        id: _id,
-        invoiceNumber,
-        fileUrl,
-        statusType,
-        email,
-        comments,
-      });
+        const { _id, invoiceNumber, fileUrl, statusType, email, comments } =
+          data;
+
+        setCaseDetails({
+          id: _id,
+          invoiceNumber,
+          fileUrl,
+          statusType,
+          email,
+          comments,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getCaseDetails();
@@ -88,6 +101,21 @@ const CaseDetailsPage = () => {
 
   function nextPage() {
     changePage(1);
+  }
+
+  if (loading) {
+    return <h2 className='text-center mt-8'>Ładowanie...</h2>;
+  }
+
+  if (error) {
+    return (
+      <div className='mx-auto text-center'>
+        <h2 className='mt-8'>Nie udało się odnaleźć żądanego case id</h2>
+        <button className='rounded-md border bg-indigo-800 text-white px-4 py-2 mt-2'>
+          <Link href={'/dashboard'}>Wróć do strony głównej</Link>
+        </button>
+      </div>
+    );
   }
 
   return (

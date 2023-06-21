@@ -20,7 +20,12 @@ const AddInvoice = () => {
           required
         />
       </div>
-      {invoiceNumber && <OurUploadDropzone invoiceNumber={invoiceNumber} />}
+      {invoiceNumber && (
+        <OurUploadDropzone
+          invoiceNumber={invoiceNumber}
+          setInvoiceNumber={setInvoiceNumber}
+        />
+      )}
     </section>
   );
 };

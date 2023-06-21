@@ -4,9 +4,13 @@ import { OurFileRouter } from '../app/api/uploadthing/core';
 
 type Props = {
   invoiceNumber: string;
+  setInvoiceNumber: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const OurUploadDropzone = ({ invoiceNumber }: Props) => {
+export const OurUploadDropzone = ({
+  invoiceNumber,
+  setInvoiceNumber,
+}: Props) => {
   const { data: session } = useSession();
   return (
     <UploadDropzone<OurFileRouter>
@@ -15,6 +19,7 @@ export const OurUploadDropzone = ({ invoiceNumber }: Props) => {
         if (res !== undefined) {
           // Do something with the response
           alert('Plik załączony pomyślnie!');
+          setInvoiceNumber('');
 
           // Create formData
           const image =

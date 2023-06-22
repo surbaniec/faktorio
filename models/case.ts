@@ -3,7 +3,7 @@ import { Schema, model, models } from 'mongoose';
 const CaseSchema = new Schema({
   invoiceNumber: {
     type: String,
-    required: [true, 'Invoice Number is required'],
+    required: true,
   },
   fileUrl: {
     type: String,
@@ -23,6 +23,10 @@ const CaseSchema = new Schema({
   },
   comments: {
     type: Array,
+    required: true,
+  },
+  createdAt: {
+    type: String,
     required: true,
   },
 });

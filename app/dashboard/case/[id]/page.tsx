@@ -13,25 +13,9 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import { CaseDetails, comments } from '@/lib/types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-
-type CaseDetails = {
-  _id: string;
-  invoiceNumber: string;
-  fileUrl: string;
-  statusType: string;
-  senderId: string;
-  email: string;
-  comments: comments[];
-};
-
-type comments = {
-  image: string;
-  name: string;
-  msg: string;
-  date: string;
-};
 
 const CaseDetailsPage = () => {
   const [numPages, setNumPages] = useState<number>(1);
@@ -54,6 +38,7 @@ const CaseDetailsPage = () => {
     senderId: '',
     email: '',
     comments: [{ image: '', name: '', msg: '', date: '' }],
+    createdAt: '',
   });
 
   useEffect(() => {
@@ -76,6 +61,7 @@ const CaseDetailsPage = () => {
           senderId,
           email,
           comments,
+          createdAt,
         } = data;
 
         setCaseDetails({
@@ -86,6 +72,7 @@ const CaseDetailsPage = () => {
           senderId,
           email,
           comments,
+          createdAt,
         });
         setLoading(false);
       } catch (error) {
@@ -119,6 +106,7 @@ const CaseDetailsPage = () => {
       senderId: caseDetails.senderId,
       email: caseDetails.email,
       comments: [...caseDetails.comments, newComment],
+      createdAt: caseDetails.createdAt,
     };
 
     try {
@@ -147,6 +135,7 @@ const CaseDetailsPage = () => {
         senderId: caseDetails.senderId,
         email: caseDetails.email,
         comments: [...caseDetails.comments, newComment],
+        createdAt: caseDetails.createdAt,
       });
     } catch (error) {
       console.log(error);

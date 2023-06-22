@@ -9,11 +9,11 @@ import {
   IoThumbsUpOutline,
   IoWarningOutline,
 } from 'react-icons/io5';
-
 import { AuthOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
+import { CaseDetails } from '@/lib/types';
 
-async function getData() {
+async function getCurrencyExchangeData() {
   const res = await fetch(
     'http://api.nbp.pl/api/exchangerates/rates/a/eur/?format=json'
   );
@@ -24,10 +24,31 @@ async function getData() {
   return res.json();
 }
 
+async function getStatistics() {
+  const res = await fetch('http://localhost:3000/api/case');
+
+  const data: CaseDetails[] = await res.json();
+
+  const pendingCases = data.filter(function (caseD: CaseDetails) {
+    return caseD.statusType === 'oczekujące';
+  });
+  const approvedCases = data.filter(function (caseD: CaseDetails) {
+    return caseD.statusType === 'zatwierdzono';
+  });
+  const stats = {
+    cases: data.length,
+    approved: approvedCases.length,
+    pending: pendingCases.length,
+  };
+
+  return stats;
+}
+
 const Dashboard = async () => {
   const session = await getServerSession(AuthOptions);
 
-  const data = await getData();
+  const currencyExchangeData = await getCurrencyExchangeData();
+  const stats = await getStatistics();
 
   if (!session) {
     redirect('/');
@@ -36,17 +57,22 @@ const Dashboard = async () => {
   return (
     <section className='col-span-full lg:col-auto px-4 md:px-10 py-10'>
       <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 justify-center'>
-        <Card icon={<IoReceiptOutline />} number={23} text='Liczba faktur' />
+        <Card
+          icon={<IoReceiptOutline />}
+          number={stats.cases}
+          text='Liczba faktur'
+        />
         <Card
           icon={<IoThumbsUpOutline />}
-          number={5}
-          text='Oczekujące na zatwierdzenie'
+          number={stats.approved}
+          text='Zatwierdzone'
         />
         <Card
           icon={<IoChatbubblesOutline />}
-          number={3}
+          number={stats.pending}
           text='Oczekujące na wyjaśnienie'
         />
+        {/* TODO */}
         <Card
           icon={<IoWarningOutline />}
           number={0}
@@ -55,8 +81,9 @@ const Dashboard = async () => {
         <div className='flex justify-center lg:justify-start'>
           <CalendarComponent />
         </div>
+        {/* TODO */}
         <ChartWrapper />
-        <CurrencyExchange currencyEx={data.rates[0].mid} />
+        <CurrencyExchange currencyEx={currencyExchangeData.rates[0].mid} />
       </div>
     </section>
   );

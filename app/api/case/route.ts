@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
           date,
         },
       ],
+      createdAt: date,
     });
 
     await newCase.save();

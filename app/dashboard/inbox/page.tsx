@@ -2,7 +2,7 @@ import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
 
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/case', {
+  const res = await fetch('http://localhost:3000/api/case/pending', {
     next: { revalidate: 10 },
   });
 

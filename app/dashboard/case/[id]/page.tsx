@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -121,13 +122,20 @@ const CaseDetailsPage = () => {
     };
 
     try {
-      await fetch(`http://localhost:3000/api/case/${pathId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(editedCase),
-      });
+      await toast.promise(
+        fetch(`http://localhost:3000/api/case/${pathId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify(editedCase),
+        }),
+        {
+          pending: 'Dodawanie komentarza...',
+          success: 'Komentarz dodany 👌',
+          error: 'Nie udało się dodać komentarza 🤯',
+        }
+      );
 
       setMessage('');
       setStatus('');

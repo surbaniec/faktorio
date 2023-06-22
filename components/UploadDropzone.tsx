@@ -1,6 +1,7 @@
 import { UploadDropzone } from '@uploadthing/react';
 import { useSession } from 'next-auth/react';
 import { OurFileRouter } from '../app/api/uploadthing/core';
+import { toast } from 'react-toastify';
 
 type Props = {
   invoiceNumber: string;
@@ -15,10 +16,9 @@ export const OurUploadDropzone = ({
   return (
     <UploadDropzone<OurFileRouter>
       endpoint='blobUploader'
-      onClientUploadComplete={(res) => {
+      onClientUploadComplete={async (res) => {
         if (res !== undefined) {
           // Do something with the response
-          alert('Plik załączony pomyślnie!');
           setInvoiceNumber('');
 
           // Create formData
@@ -43,10 +43,17 @@ export const OurUploadDropzone = ({
           formData.append('msg', msg);
           formData.append('date', date);
 
-          fetch('http://localhost:3000/api/case', {
-            method: 'POST',
-            body: formData,
-          });
+          await toast.promise(
+            fetch('http://localhost:3000/api/case', {
+              method: 'POST',
+              body: formData,
+            }),
+            {
+              pending: 'Przesyłanie faktury',
+              success: 'Faktura przesłana 👌',
+              error: 'Nie udało się przesłać faktury 🤯',
+            }
+          );
         }
       }}
       onUploadError={(error: Error) => {

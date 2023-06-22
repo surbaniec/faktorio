@@ -5,6 +5,9 @@ import { Roboto } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
@@ -29,6 +32,7 @@ export default function RootLayout({ children, session }: Props) {
         suppressHydrationWarning={true}
       >
         <SessionProvider session={session}>{children}</SessionProvider>
+        <ToastContainer />
       </body>
     </html>
   );

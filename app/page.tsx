@@ -19,7 +19,7 @@ const features = [
   {
     id: 3,
     title: 'Przypomnienia o płatnościach',
-    desc: 'Ustaw automatyczne przypomnienia o płatnościach przed upływem terkinu płatności.',
+    desc: 'Ustaw automatyczne przypomnienia o płatnościach przed upływem terminu płatności.',
   },
 ];
 
@@ -40,8 +40,8 @@ export default function Home() {
               Zarządzaj swoimi fakturami
             </h2>
             <p className='text-xl mt-3 text-zinc-600'>
-              Teraz możesz łatwo i wygodnie przechowywać, zarządzać i
-              monitorować swoje faktury w jednym miejscu!
+              Teraz możesz łatwo i wygodnie przechowywać i monitorować swoje
+              faktury w jednym miejscu!
             </p>
             <Button text='Dowiedz się więcej' />
           </div>

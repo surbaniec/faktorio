@@ -26,19 +26,6 @@ ChartJS.register(
   Legend
 );
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Liczba otrzymanych faktur',
-    },
-  },
-};
-
 const labels = [
   'Styczeń',
   'Luty',
@@ -82,7 +69,7 @@ const Chart = () => {
     datasets: [
       {
         fill: true,
-        label: 'Faktury',
+        label: 'Liczba otrzymanych faktur',
         data: cases,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -90,7 +77,7 @@ const Chart = () => {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Line data={data} />;
 };
 
 export default Chart;

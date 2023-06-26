@@ -1,11 +1,9 @@
-'use client';
-
+import Provider from '@/components/Provider';
 import './globals.css';
 import { Roboto } from 'next/font/google';
-import { SessionProvider } from 'next-auth/react';
-import { Session } from 'next-auth';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Session } from 'next-auth';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -30,7 +28,7 @@ export default function RootLayout({ children, session }: Props) {
         className={`${roboto.className} relative overflow-x-hidden`}
         suppressHydrationWarning={true}
       >
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <Provider session={session}>{children}</Provider>
         <ToastContainer />
       </body>
     </html>

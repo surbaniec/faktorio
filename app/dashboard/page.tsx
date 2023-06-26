@@ -17,7 +17,7 @@ type NBPApiResponse = {
   table: string;
   currency: string;
   code: string;
-  rates: [no: string, effectiveDate: string, mid: number];
+  rates: [{ no: string; effectiveDate: string; mid: number }];
 };
 
 async function getCurrencyExchangeData(): Promise<NBPApiResponse> {
@@ -99,9 +99,7 @@ const Dashboard = async () => {
         </div>
         {/* TODO */}
         <ChartWrapper />
-        <CurrencyExchange
-          currencyEx={parseFloat(currencyExchangeData.rates[0].mid)}
-        />
+        <CurrencyExchange currencyEx={currencyExchangeData.rates[0].mid} />
       </div>
     </section>
   );

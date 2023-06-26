@@ -13,35 +13,51 @@ import { AuthOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 import { CaseDetails } from '@/lib/types';
 
-async function getCurrencyExchangeData() {
+type NBPApiResponse = {
+  table: string;
+  currency: string;
+  code: string;
+  rates: [no: string, effectiveDate: string, mid: number];
+};
+
+async function getCurrencyExchangeData(): Promise<NBPApiResponse> {
   const res = await fetch(
     'http://api.nbp.pl/api/exchangerates/rates/a/eur/?format=json'
   );
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
 
   return res.json();
 }
 
-async function getStatistics() {
+async function getStatistics(): Promise<{
+  cases: number;
+  approved: number;
+  pending: number;
+}> {
   const res = await fetch('http://localhost:3000/api/case');
 
   const data: CaseDetails[] = await res.json();
 
-  const pendingCases = data.filter(function (caseD: CaseDetails) {
-    return caseD.statusType === 'oczekujące';
-  });
-  const approvedCases = data.filter(function (caseD: CaseDetails) {
-    return caseD.statusType === 'zatwierdzono';
-  });
-  const stats = {
-    cases: data.length,
-    approved: approvedCases.length,
-    pending: pendingCases.length,
-  };
+  if (!data || data.length === 0)
+    return {
+      cases: 0,
+      approved: 0,
+      pending: 0,
+    };
+  else {
+    const pendingCases = data.filter(function (caseD: CaseDetails) {
+      return caseD.statusType === 'oczekujące';
+    });
+    const approvedCases = data.filter(function (caseD: CaseDetails) {
+      return caseD.statusType === 'zatwierdzono';
+    });
+    const stats = {
+      cases: data.length,
+      approved: approvedCases.length,
+      pending: pendingCases.length,
+    };
 
-  return stats;
+    return stats;
+  }
 }
 
 const Dashboard = async () => {
@@ -83,7 +99,9 @@ const Dashboard = async () => {
         </div>
         {/* TODO */}
         <ChartWrapper />
-        <CurrencyExchange currencyEx={currencyExchangeData.rates[0].mid} />
+        <CurrencyExchange
+          currencyEx={parseFloat(currencyExchangeData.rates[0]?.[2])}
+        />
       </div>
     </section>
   );

@@ -1,7 +1,8 @@
 import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
+import { CaseDetails } from '@/lib/types';
 
-async function getData() {
+async function getData(): Promise<CaseDetails[]> {
   const res = await fetch('http://localhost:3000/api/case', {
     next: { revalidate: 10 },
   });

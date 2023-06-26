@@ -4,7 +4,6 @@ import './globals.css';
 import { Roboto } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

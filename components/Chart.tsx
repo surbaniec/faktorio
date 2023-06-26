@@ -1,3 +1,6 @@
+'use client';
+
+import { CaseDetails } from '@/lib/types';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +13,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import React, { useEffect, useState } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -22,19 +26,15 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top' as const,
+      position: 'top',
     },
     title: {
       display: true,
       text: 'Liczba otrzymanych faktur',
-      font: {
-        size: 14,
-        weight: 500,
-      },
     },
   },
 };
@@ -53,22 +53,43 @@ const labels = [
   'Grudzień',
 ];
 
-const dummyData = [5, 13, 8, 7, 4, 12, 14, 11, 7, 9, 7, 3];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'Faktury',
-      data: dummyData,
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
 const Chart = () => {
+  const [cases, setCases] = useState<number[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('http://localhost:3000/api/case');
+      const casesData: CaseDetails[] = await res.json();
+
+      const months: number[] = Array(12).fill(0);
+
+      casesData.forEach((caseDetail: CaseDetails) => {
+        const createdAtInSeconds = parseInt(caseDetail.createdAt) / 1000;
+        const date = new Date(createdAtInSeconds * 1000);
+        const month = date.getMonth();
+
+        months[month] += 1;
+      });
+
+      setCases(months);
+    }
+
+    fetchData();
+  }, []);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        fill: true,
+        label: 'Faktury',
+        data: cases,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
   return <Line options={options} data={data} />;
 };
 

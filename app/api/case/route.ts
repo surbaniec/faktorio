@@ -1,10 +1,11 @@
+import { CaseDetails } from '@/lib/types';
 import Case from '@/models/case';
 import Users from '@/models/user';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const fetchedCases = await Case.find();
+    const fetchedCases: CaseDetails[] = await Case.find();
 
     if (!fetchedCases) {
       return NextResponse.json({ msg: 'No cases to fetch' });

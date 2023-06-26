@@ -33,7 +33,7 @@ async function getStatistics(): Promise<{
   approved: number;
   pending: number;
 }> {
-  const res = await fetch('http://localhost:3000/api/case');
+  const res = await fetch(process.env.URL + '/api/case');
 
   const data: CaseDetails[] = await res.json();
 

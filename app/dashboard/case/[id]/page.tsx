@@ -47,6 +47,8 @@ const CaseDetailsPage = () => {
       setError(false);
       try {
         const res = await fetch(`http://localhost:3000/api/case/${pathId}`);
+        // nie wiem dlaczego nie działa
+        // const res = await fetch(`${process.env.URL}/api/case/${pathId}`);
         const data = await res.json();
 
         if (res.status === 500) {

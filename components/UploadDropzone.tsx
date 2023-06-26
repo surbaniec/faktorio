@@ -44,7 +44,7 @@ export const OurUploadDropzone = ({
           formData.append('date', date);
 
           await toast.promise(
-            fetch('http://localhost:3000/api/case', {
+            fetch(process.env.URL + '/api/case', {
               method: 'POST',
               body: formData,
             }),

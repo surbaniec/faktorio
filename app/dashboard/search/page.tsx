@@ -3,7 +3,7 @@ import { DataTable } from '@/components/ui/dataTable';
 import { CaseDetails } from '@/lib/types';
 
 async function getData(): Promise<CaseDetails[]> {
-  const res = await fetch('http://localhost:3000/api/case', {
+  const res = await fetch(process.env.URL + '/api/case', {
     next: { revalidate: 10 },
   });
 

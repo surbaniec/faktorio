@@ -100,7 +100,7 @@ const Dashboard = async () => {
         {/* TODO */}
         <ChartWrapper />
         <CurrencyExchange
-          currencyEx={parseFloat(currencyExchangeData.rates[0]?.[2])}
+          currencyEx={parseFloat(currencyExchangeData.rates[0].mid)}
         />
       </div>
     </section>

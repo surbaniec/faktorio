@@ -1,6 +1,7 @@
 import { UploadDropzone } from '@uploadthing/react';
 import { useSession } from 'next-auth/react';
 import { OurFileRouter } from '../app/api/uploadthing/core';
+import '@uploadthing/react/styles.css';
 import { toast } from 'react-toastify';
 
 type Props = {
@@ -29,7 +30,11 @@ export const OurUploadDropzone = ({
           const name =
             typeof session?.user?.name === 'string'
               ? session?.user.name
-              : JSON.stringify(session?.user?.name);
+              : JSON.stringify(session?.user?.id);
+          const id =
+            typeof session?.user?.id === 'string'
+              ? session?.user.id
+              : JSON.stringify(session?.user?.id);
           const msg = 'Przesłano fakturę.';
           const date = JSON.stringify(Date.now());
 
@@ -37,14 +42,14 @@ export const OurUploadDropzone = ({
           formData.append('invoiceNumber', invoiceNumber);
           formData.append('fileUrl', res[0].fileUrl);
           formData.append('statusType', 'oczekujące');
-          formData.append('senderId', session?.user?.id);
+          formData.append('senderId', id);
           formData.append('image', image);
           formData.append('name', name);
           formData.append('msg', msg);
           formData.append('date', date);
 
           await toast.promise(
-            fetch(process.env.URL + '/api/case', {
+            fetch('/api/case', {
               method: 'POST',
               body: formData,
             }),

@@ -46,9 +46,7 @@ const CaseDetailsPage = () => {
       setLoading(true);
       setError(false);
       try {
-        const res = await fetch(`http://localhost:3000/api/case/${pathId}`);
-        // nie wiem dlaczego nie działa
-        // const res = await fetch(`${process.env.URL}/api/case/${pathId}`);
+        const res = await fetch(`/api/case/${pathId}`);
         const data = await res.json();
 
         if (res.status === 500) {
@@ -113,7 +111,7 @@ const CaseDetailsPage = () => {
 
     try {
       await toast.promise(
-        fetch(`http://localhost:3000/api/case/${pathId}`, {
+        fetch(`/api/case/${pathId}`, {
           method: 'PUT',
           headers: {
             'Content-type': 'application/json',
@@ -286,7 +284,7 @@ const CaseDetailsPage = () => {
               ></textarea>
               <button
                 type='submit'
-                className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center'
+                className='cursor-pointer md:text-lg !bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center'
               >
                 Wyślij <BsFillSendFill className='ml-2' />
               </button>
@@ -314,7 +312,7 @@ const CaseDetailsPage = () => {
             type='button'
             disabled={pageNumber <= 1}
             onClick={previousPage}
-            className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md'
+            className='cursor-pointer md:text-lg !bg-indigo-800 text-white px-4 py-2 rounded-md'
           >
             Poprzednia
           </button>
@@ -322,7 +320,7 @@ const CaseDetailsPage = () => {
             type='button'
             disabled={pageNumber >= numPages}
             onClick={nextPage}
-            className='cursor-pointer md:text-lg bg-indigo-800 text-white px-4 py-2 rounded-md'
+            className='cursor-pointer md:text-lg !bg-indigo-800 text-white px-4 py-2 rounded-md'
           >
             Następna
           </button>

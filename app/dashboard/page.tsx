@@ -12,6 +12,7 @@ import {
 import { AuthOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 import { CaseDetails } from '@/lib/types';
+import { toast } from 'react-toastify';
 
 type NBPApiResponse = {
   table: string;
@@ -33,7 +34,7 @@ async function getStatistics(): Promise<{
   approved: number;
   pending: number;
 }> {
-  const res = await fetch(process.env.URL + '/api/case');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/case`);
 
   const data: CaseDetails[] = await res.json();
 

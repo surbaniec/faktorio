@@ -11,8 +11,7 @@ import {
 } from 'react-icons/io5';
 import { AuthOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
-import { CaseDetails } from '@/lib/types';
-import { toast } from 'react-toastify';
+import { getStats } from '@/lib/getStats';
 
 type NBPApiResponse = {
   table: string;
@@ -29,43 +28,13 @@ async function getCurrencyExchangeData(): Promise<NBPApiResponse> {
   return res.json();
 }
 
-async function getStatistics(): Promise<{
-  cases: number;
-  approved: number;
-  pending: number;
-}> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/case`);
-
-  const data: CaseDetails[] = await res.json();
-
-  if (!data || data.length === 0)
-    return {
-      cases: 0,
-      approved: 0,
-      pending: 0,
-    };
-  else {
-    const pendingCases = data.filter(function (caseD: CaseDetails) {
-      return caseD.statusType === 'oczekujące';
-    });
-    const approvedCases = data.filter(function (caseD: CaseDetails) {
-      return caseD.statusType === 'zatwierdzono';
-    });
-    const stats = {
-      cases: data.length,
-      approved: approvedCases.length,
-      pending: pendingCases.length,
-    };
-
-    return stats;
-  }
-}
+export const revalidate = 10;
 
 const Dashboard = async () => {
   const session = await getServerSession(AuthOptions);
 
   const currencyExchangeData = await getCurrencyExchangeData();
-  const stats = await getStatistics();
+  const stats = await getStats();
 
   if (!session) {
     redirect('/');
@@ -89,7 +58,6 @@ const Dashboard = async () => {
           number={stats.pending}
           text='Oczekujące na wyjaśnienie'
         />
-        {/* TODO */}
         <Card
           icon={<IoWarningOutline />}
           number={0}
@@ -98,7 +66,6 @@ const Dashboard = async () => {
         <div className='flex justify-center lg:justify-start'>
           <CalendarComponent />
         </div>
-        {/* TODO */}
         <ChartWrapper />
         <CurrencyExchange currencyEx={currencyExchangeData.rates[0].mid} />
       </div>

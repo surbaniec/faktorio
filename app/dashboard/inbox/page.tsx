@@ -1,17 +1,11 @@
 import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
-import { CaseDetails } from '@/lib/types';
+import { getPendingCases } from '@/lib/cases';
 
-async function getData(): Promise<CaseDetails[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/case/pending`, {
-    next: { revalidate: 10 },
-  });
-
-  return res.json();
-}
+export const revalidate = 10;
 
 const InboxPage = async () => {
-  const data = await getData();
+  const data = await getPendingCases();
 
   return (
     <section className='px-4 md:px-10 py-10'>

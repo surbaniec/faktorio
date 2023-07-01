@@ -49,10 +49,6 @@ const CaseDetailsPage = () => {
         const res = await fetch(`/api/case/${pathId}`);
         const data = await res.json();
 
-        if (res.status === 500) {
-          setError(true);
-        }
-
         const {
           _id,
           invoiceNumber,
@@ -77,6 +73,8 @@ const CaseDetailsPage = () => {
         setLoading(false);
       } catch (error) {
         console.log(error);
+        setError(true);
+        setLoading(false);
       }
     };
 

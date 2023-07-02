@@ -2,7 +2,7 @@ import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
 import { getCases } from '@/lib/cases';
 
-export const revalidate = 10;
+export const dynamic = 'force-dynamic';
 
 const SearchPage = async () => {
   const data = await JSON.parse(JSON.stringify(await getCases()));

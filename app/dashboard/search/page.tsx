@@ -5,7 +5,7 @@ import { getCases } from '@/lib/cases';
 export const revalidate = 10;
 
 const SearchPage = async () => {
-  const data = await getCases();
+  const data = await JSON.parse(JSON.stringify(await getCases()));
 
   return (
     <section className='px-4 md:px-10 py-10'>

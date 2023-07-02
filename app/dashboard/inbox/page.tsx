@@ -5,7 +5,7 @@ import { getPendingCases } from '@/lib/cases';
 export const revalidate = 10;
 
 const InboxPage = async () => {
-  const data = await getPendingCases();
+  const data = await JSON.parse(JSON.stringify(await getPendingCases()));
 
   return (
     <section className='px-4 md:px-10 py-10'>

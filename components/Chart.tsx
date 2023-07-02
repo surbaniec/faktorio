@@ -45,7 +45,7 @@ const Chart = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('http://localhost:3000/api/case');
+      const res = await fetch('/api/case');
       const casesData: CaseDetails[] = await res.json();
 
       const months: number[] = Array(12).fill(0);

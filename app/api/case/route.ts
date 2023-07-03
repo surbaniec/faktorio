@@ -5,11 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const fetchedCases: CaseDetails[] = await Case.find();
-
-    if (!fetchedCases) {
-      return NextResponse.json({ msg: 'No cases to fetch' });
-    }
+    const fetchedCases: CaseDetails[] = await Case.find({});
 
     return NextResponse.json(fetchedCases);
   } catch (error) {

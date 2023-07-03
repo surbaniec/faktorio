@@ -46,7 +46,9 @@ const CaseDetailsPage = () => {
       setLoading(true);
       setError(false);
       try {
-        const res = await fetch(`/api/case/${pathId}`);
+        const res = await fetch(`/api/case/${pathId}`, {
+          next: { revalidate: 60 },
+        });
         const data = await res.json();
 
         const {

@@ -28,7 +28,7 @@ async function getCurrencyExchangeData(): Promise<NBPApiResponse> {
   return res.json();
 }
 
-export const revalidate = 10;
+export const dynamic = 'force-dynamic';
 
 const Dashboard = async () => {
   const session = await getServerSession(AuthOptions);

@@ -1,5 +1,3 @@
-'use client';
-
 import Chart from './Chart';
 
 const ChartWrapper = () => {

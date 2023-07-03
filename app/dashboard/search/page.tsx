@@ -5,7 +5,7 @@ import { getCases } from '@/lib/cases';
 export const dynamic = 'force-dynamic';
 
 const SearchPage = async () => {
-  const data = await JSON.parse(JSON.stringify(await getCases()));
+  const data = await getCases();
 
   return (
     <section className='px-4 md:px-10 py-10'>

@@ -28,8 +28,6 @@ async function getCurrencyExchangeData(): Promise<NBPApiResponse> {
   return res.json();
 }
 
-export const dynamic = 'force-dynamic';
-
 const Dashboard = async () => {
   const session = await getServerSession(AuthOptions);
 

@@ -3,9 +3,10 @@ import { CaseDetails } from './types';
 
 export async function getCases() {
   try {
-    const cases: CaseDetails[] = await Case.find();
-    return cases;
+    const cases: CaseDetails[] = await Case.find({});
+    return JSON.parse(JSON.stringify(cases));
   } catch (error) {
+    console.log('getCases error');
     console.log(error);
     return [];
   }
@@ -17,8 +18,9 @@ export async function getPendingCases() {
       statusType: 'oczekujące',
     });
 
-    return pendingCases;
+    return JSON.parse(JSON.stringify(pendingCases));
   } catch (error) {
+    console.log('getPendingCases error');
     console.log(error);
     return [];
   }

@@ -28,6 +28,12 @@ async function getCurrencyExchangeData(): Promise<NBPApiResponse> {
   return res.json();
 }
 
+type Stats = {
+  cases: number;
+  approved: number;
+  pending: number;
+};
+
 const Dashboard = async () => {
   const session = await getServerSession(AuthOptions);
 
@@ -41,26 +47,33 @@ const Dashboard = async () => {
   return (
     <section className='col-span-full lg:col-auto px-4 md:px-10 py-10'>
       <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 justify-center'>
-        <Card
-          icon={<IoReceiptOutline />}
-          number={stats.cases}
-          text='Liczba faktur'
-        />
-        <Card
-          icon={<IoThumbsUpOutline />}
-          number={stats.approved}
-          text='Zatwierdzone'
-        />
-        <Card
-          icon={<IoChatbubblesOutline />}
-          number={stats.pending}
-          text='Oczekujące na wyjaśnienie'
-        />
-        <Card
-          icon={<IoWarningOutline />}
-          number={0}
-          text='Płatność przeterminowana'
-        />
+        {'error' in stats ? (
+          <p>Wystąpił błąd podczas pobierania danych</p>
+        ) : (
+          <>
+            <Card
+              icon={<IoReceiptOutline />}
+              number={stats.cases}
+              text='Liczba faktur'
+            />
+            <Card
+              icon={<IoThumbsUpOutline />}
+              number={stats.approved}
+              text='Zatwierdzone'
+            />
+            <Card
+              icon={<IoChatbubblesOutline />}
+              number={stats.pending}
+              text='Oczekujące na wyjaśnienie'
+            />
+            <Card
+              icon={<IoWarningOutline />}
+              number={0}
+              text='Płatność przeterminowana'
+            />
+          </>
+        )}
+
         <div className='flex justify-center lg:justify-start'>
           <CalendarComponent />
         </div>

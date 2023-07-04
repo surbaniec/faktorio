@@ -19,11 +19,6 @@ export async function getStats() {
 
     return stats;
   } catch (error) {
-    console.log(error);
-    return {
-      cases: 0,
-      approved: 0,
-      pending: 0,
-    };
+    return { error: 'Failed to get stats!' };
   }
 }

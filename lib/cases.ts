@@ -4,11 +4,10 @@ import { CaseDetails } from './types';
 export async function getCases() {
   try {
     const cases: CaseDetails[] = await Case.find({});
+
     return JSON.parse(JSON.stringify(cases));
   } catch (error) {
-    console.log('getCases error');
-    console.log(error);
-    return [];
+    return { error: 'Failed to fetch cases!' };
   }
 }
 
@@ -20,8 +19,6 @@ export async function getPendingCases() {
 
     return JSON.parse(JSON.stringify(pendingCases));
   } catch (error) {
-    console.log('getPendingCases error');
-    console.log(error);
-    return [];
+    return { error: 'Failed to fetch pending cases!' };
   }
 }

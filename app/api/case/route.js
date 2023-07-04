@@ -1,19 +1,19 @@
-import { CaseDetails } from '@/lib/types';
+import { getCases } from '@/lib/cases';
 import Case from '@/models/case';
 import Users from '@/models/user';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const fetchedCases: CaseDetails[] = await Case.find({});
+    const cases = await getCases();
 
-    return NextResponse.json(fetchedCases);
+    return NextResponse.json(cases);
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
   try {
     const formData = await request.formData();
 
@@ -53,6 +53,6 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

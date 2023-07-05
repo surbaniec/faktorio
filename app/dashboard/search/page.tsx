@@ -2,6 +2,8 @@ import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
 import { getCases } from '@/lib/cases';
 
+export const dynamic = 'force-dynamic';
+
 const SearchPage = async () => {
   const data = await getCases();
 

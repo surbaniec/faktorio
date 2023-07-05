@@ -5,6 +5,7 @@ export async function GET(request) {
   const id = request.url.slice(request.url.lastIndexOf('/') + 1);
 
   try {
+    await connectToDb();
     const matchedCase = await Case.findOne({ _id: id });
 
     return NextResponse.json(matchedCase);
@@ -15,6 +16,7 @@ export async function GET(request) {
 
 export async function PUT(request) {
   try {
+    await connectToDb();
     const res = await request.json();
     const id = res._id;
 

@@ -1,8 +1,10 @@
 import Case from '@/models/case';
 import { CaseDetails } from './types';
+import { connectToDb } from './databaseConnection';
 
 export async function getStats() {
   try {
+    await connectToDb();
     const cases: CaseDetails[] = await Case.find({});
 
     const pendingCases = cases.filter(function (caseD: CaseDetails) {

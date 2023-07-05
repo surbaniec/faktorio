@@ -28,7 +28,7 @@ export default function RootLayout({ children, session }: Props) {
         className={`${roboto.className} relative overflow-x-hidden`}
         suppressHydrationWarning={true}
       >
-        <Provider session={session}>
+        <Provider>
           <ToastContainer />
           {children}
         </Provider>

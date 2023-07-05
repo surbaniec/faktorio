@@ -4,7 +4,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 
 interface Props {
-  session: Session | null;
+  session?: Session;
   children: React.ReactNode;
 }
 

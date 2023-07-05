@@ -1,11 +1,13 @@
 import { getCases } from '@/lib/cases';
+import { connectToDb } from '@/lib/databaseConnection';
 import Case from '@/models/case';
 import Users from '@/models/user';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const cases = await getCases();
+    await connectToDb();
+    const cases = await getCases({});
 
     return NextResponse.json(cases);
   } catch (error) {
@@ -27,6 +29,7 @@ export async function POST(request) {
     const date = formData.get('date');
 
     //Find user
+    await connectToDb();
     const user = await Users.findOne({ id: senderId });
 
     const newCase = new Case({

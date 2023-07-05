@@ -2,6 +2,7 @@ import User from '@/models/user';
 import { connectToDb } from '@/lib/databaseConnection';
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
+import mongoose from 'mongoose';
 
 export const AuthOptions = {
   providers: [
@@ -16,8 +17,6 @@ export const AuthOptions = {
         email: session.user.email,
       });
 
-      if (!sessionUser) return;
-
       session.user.id = sessionUser._id.toString();
 
       return session;
@@ -27,7 +26,7 @@ export const AuthOptions = {
         await connectToDb();
 
         // check if a user already exists
-        const userExists = await User.findOne({
+        const userExists = await mongoose.model('User').findOne({
           email: profile.email,
         });
 

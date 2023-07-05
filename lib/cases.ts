@@ -1,8 +1,10 @@
 import Case from '@/models/case';
 import { CaseDetails } from './types';
+import { connectToDb } from './databaseConnection';
 
 export async function getCases() {
   try {
+    await connectToDb();
     const cases: CaseDetails[] = await Case.find({});
 
     return JSON.parse(JSON.stringify(cases));
@@ -13,6 +15,8 @@ export async function getCases() {
 
 export async function getPendingCases() {
   try {
+    await connectToDb();
+
     const pendingCases: CaseDetails[] = await Case.find({
       statusType: 'oczekujące',
     });

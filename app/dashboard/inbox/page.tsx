@@ -2,6 +2,8 @@ import { columns } from '@/components/DataTableColumns';
 import { DataTable } from '@/components/ui/dataTable';
 import { getPendingCases } from '@/lib/cases';
 
+export const dynamic = 'force-dynamic';
+
 const InboxPage = async () => {
   const data = await getPendingCases();
 

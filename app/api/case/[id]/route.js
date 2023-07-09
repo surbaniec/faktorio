@@ -1,3 +1,4 @@
+import { connectToDb } from '@/lib/databaseConnection';
 import Case from '@/models/case';
 import { NextResponse } from 'next/server';
 

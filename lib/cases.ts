@@ -1,6 +1,8 @@
 import Case from '@/models/case';
 import { CaseDetails } from './types';
 import { connectToDb } from './databaseConnection';
+import { getServerSession } from 'next-auth';
+import { AuthOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function getCases() {
   try {
@@ -16,9 +18,11 @@ export async function getCases() {
 export async function getPendingCases() {
   try {
     await connectToDb();
+    const session = await getServerSession(AuthOptions);
 
     const pendingCases: CaseDetails[] = await Case.find({
       statusType: 'oczekujące',
+      senderId: session.user.id,
     });
 
     return JSON.parse(JSON.stringify(pendingCases));

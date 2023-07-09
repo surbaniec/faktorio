@@ -30,7 +30,7 @@ export async function POST(request) {
 
     //Find user
     await connectToDb();
-    const user = await Users.findOne({ id: senderId });
+    const user = await Users.findOne({ _id: senderId });
 
     const newCase = new Case({
       invoiceNumber,

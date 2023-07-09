@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { CaseDetails, comments } from '@/lib/types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -176,6 +176,7 @@ const CaseDetailsPage = () => {
 
   return (
     <section className='px-4 md:px-10 py-10 flex flex-col gap-4 lg:flex-row-reverse'>
+      <ToastContainer />
       <div className='flex flex-col gap-4 lg:basis-2/5'>
         {/* Invoice Details */}
         <div className='bg-white rounded-md border px-4 md:px-8 py-4'>

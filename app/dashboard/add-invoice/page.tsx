@@ -2,12 +2,14 @@
 
 import { OurUploadDropzone } from '@/components/UploadDropzone';
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 const AddInvoice = () => {
   const [invoiceNumber, setInvoiceNumber] = useState<string>('');
 
   return (
     <section className='flex flex-col gap-2 px-4 py-10 bg-white border rounded-md mx-4 md:mx-10 my-4 md:my-10 h-fit'>
+      <ToastContainer />
       <div>
         <input
           type='text'

@@ -1,7 +1,7 @@
 import { getCases } from '@/lib/cases';
 import { connectToDb } from '@/lib/databaseConnection';
 import { Case } from '@/models/case';
-import { Users } from '@/models/user';
+import { User } from '@/models/user';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -30,7 +30,7 @@ export async function POST(request) {
 
     //Find user
     await connectToDb();
-    const user = await Users.findOne({ _id: senderId });
+    const user = await User.findOne({ _id: senderId });
 
     const newCase = new Case({
       invoiceNumber,

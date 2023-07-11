@@ -1,7 +1,7 @@
 import { getCases } from '@/lib/cases';
 import { connectToDb } from '@/lib/databaseConnection';
-import Case from '@/models/case';
-import Users from '@/models/user';
+import { Case } from '@/models/case';
+import { Users } from '@/models/user';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

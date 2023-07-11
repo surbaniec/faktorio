@@ -12,7 +12,7 @@ import {
 } from 'react-icons/hi';
 import Link from 'next/link';
 
-const DashboardNavbar = () => {
+export const Navbar = () => {
   // required:true => if there is no session, redirect to log in page
   const { data: session } = useSession({ required: true });
   const [showDropdown, setShowDropdown] = useState(false);
@@ -78,5 +78,3 @@ const DashboardNavbar = () => {
     </nav>
   );
 };
-
-export default DashboardNavbar;

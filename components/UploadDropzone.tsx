@@ -26,34 +26,18 @@ export const OurUploadDropzone = ({
       endpoint='blobUploader'
       onClientUploadComplete={async (res) => {
         if (res !== undefined) {
-          // Do something with the response
           setInvoiceNumber('');
 
           // Create formData
-          const image =
-            typeof session?.user?.image === 'string'
-              ? session?.user.image
-              : JSON.stringify(session?.user?.image);
-          const name =
-            typeof session?.user?.name === 'string'
-              ? session?.user.name
-              : JSON.stringify(session?.user?.id);
-          const id =
-            typeof session?.user?.id === 'string'
-              ? session?.user.id
-              : JSON.stringify(session?.user?.id);
-          const msg = 'Przesłano fakturę.';
-          const date = JSON.stringify(Date.now());
-
           const formData = new FormData();
           formData.append('invoiceNumber', invoiceNumber);
           formData.append('fileUrl', res[0].fileUrl);
           formData.append('statusType', 'oczekujące');
-          formData.append('senderId', id);
-          formData.append('image', image);
-          formData.append('name', name);
-          formData.append('msg', msg);
-          formData.append('date', date);
+          formData.append('senderId', JSON.stringify(session?.user?.id));
+          formData.append('image', JSON.stringify(session?.user?.image));
+          formData.append('name', JSON.stringify(session?.user?.name));
+          formData.append('msg', 'Przesłano fakturę.');
+          formData.append('date', JSON.stringify(Date.now()));
 
           await toast.promise(
             fetch('/api/case', {

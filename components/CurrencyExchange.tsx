@@ -4,7 +4,7 @@ type Props = {
   currencyEx: number;
 };
 
-const CurrencyExchange = ({ currencyEx }: Props) => {
+export const CurrencyExchange = ({ currencyEx }: Props) => {
   return (
     <div
       className="rounded-md bg-white px-4 py-4 flex flex-col gap-4 border lg:bg-[url('/assets/images/stock_market.jpg')] m
@@ -23,5 +23,3 @@ lg:bg-contain lg:bg-bottom lg:bg-no-repeat"
     </div>
   );
 };
-
-export default CurrencyExchange;

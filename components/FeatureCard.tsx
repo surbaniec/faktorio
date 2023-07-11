@@ -5,7 +5,7 @@ type Props = {
   desc: string;
 };
 
-const FeatureCard = ({ title, desc }: Props) => {
+export const FeatureCard = ({ title, desc }: Props) => {
   return (
     <div className='bg-white hover:shadow-md duration-200 rounded-lg py-8 px-8 text-left'>
       <div className='bg-orange-500 w-16 h-16 flex justify-center items-center rounded-lg mb-4'>
@@ -18,5 +18,3 @@ const FeatureCard = ({ title, desc }: Props) => {
     </div>
   );
 };
-
-export default FeatureCard;

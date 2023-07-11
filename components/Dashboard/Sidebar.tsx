@@ -17,7 +17,7 @@ import {
 } from 'react-icons/hi';
 import { HiOutlineInboxArrowDown } from 'react-icons/hi2';
 
-const DashboardSidebar = () => {
+export const Sidebar = () => {
   const pathname = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
@@ -243,5 +243,3 @@ const DashboardSidebar = () => {
     </>
   );
 };
-
-export default DashboardSidebar;

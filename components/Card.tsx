@@ -7,7 +7,7 @@ type Props = {
   text: string;
 };
 
-const Card = ({ icon, number, text }: Props) => {
+export const Card = ({ icon, number, text }: Props) => {
   return (
     <div className='rounded-md px-4 py-4 bg-white border flex flex-col justify-between gap-2'>
       <div className='flex justify-between items-center'>
@@ -25,5 +25,3 @@ const Card = ({ icon, number, text }: Props) => {
     </div>
   );
 };
-
-export default Card;

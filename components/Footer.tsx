@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import { BsSendFill } from 'react-icons/bs';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className='mt-10 bg-zinc-50 rounded-lg px-8 py-8 '>
       <div className='flex flex-col gap-8 md:flex-row md:justify-between'>
@@ -80,5 +80,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

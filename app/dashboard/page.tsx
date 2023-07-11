@@ -1,7 +1,7 @@
-import CalendarComponent from '@/components/Calendar';
-import Card from '@/components/Card';
-import ChartWrapper from '@/components/ChartWrapper';
-import CurrencyExchange from '@/components/CurrencyExchange';
+import { CalendarComponent } from '@/components/Calendar';
+import { Card } from '@/components/Card';
+import { ChartWrapper } from '@/components/ChartWrapper';
+import { CurrencyExchange } from '@/components/CurrencyExchange';
 import { getServerSession } from 'next-auth';
 import {
   IoReceiptOutline,

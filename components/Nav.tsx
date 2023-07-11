@@ -4,7 +4,7 @@ import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Nav = () => {
+export const Nav = () => {
   const { data: session } = useSession();
 
   return (
@@ -39,5 +39,3 @@ const Nav = () => {
     </nav>
   );
 };
-
-export default Nav;

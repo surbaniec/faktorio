@@ -1,7 +1,7 @@
 import './globals.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { Roboto } from 'next/font/google';
-import Provider from '@/components/Provider';
+import { Provider } from '@/components/Provider';
 import { Session } from 'next-auth';
 
 const roboto = Roboto({

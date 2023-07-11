@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import Nav from '@/components/Nav';
-import FeatureCard from '@/components/FeatureCard';
-import Footer from '@/components/Footer';
-import Button from '@/components/Button';
-import Pill from '@/components/Pill';
+import { Nav } from '@/components/Nav';
+import { FeatureCard } from '@/components/FeatureCard';
+import { Footer } from '@/components/Footer';
+import { Button } from '@/components/Button';
+import { Pill } from '@/components/Pill';
 
 const features = [
   {

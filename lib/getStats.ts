@@ -1,5 +1,5 @@
-import Case from '@/models/case';
-import { CaseDetails } from './types';
+import { Case } from '@/models/case';
+import { CaseDetails } from '../types/types';
 import { connectToDb } from './databaseConnection';
 import { getServerSession } from 'next-auth';
 import { AuthOptions } from '@/app/api/auth/[...nextauth]/route';

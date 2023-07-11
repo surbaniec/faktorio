@@ -31,6 +31,4 @@ const CaseSchema = new Schema({
   },
 });
 
-const Case = models.Case || model('Case', CaseSchema);
-
-export default Case;
+export const Case = models.Case || model('Case', CaseSchema);

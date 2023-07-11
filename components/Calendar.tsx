@@ -3,7 +3,7 @@
 import { Calendar } from '@/components/ui/calendar';
 import { useState } from 'react';
 
-const CalendarComponent = () => {
+export const CalendarComponent = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
@@ -17,5 +17,3 @@ const CalendarComponent = () => {
     </div>
   );
 };
-
-export default CalendarComponent;

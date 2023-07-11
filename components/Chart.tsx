@@ -1,6 +1,6 @@
 'use client';
 
-import { CaseDetails } from '@/lib/types';
+import { CaseDetails } from '@/types/types';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -40,7 +40,7 @@ const labels = [
   'Grudzień',
 ];
 
-const Chart = () => {
+export const Chart = () => {
   const [cases, setCases] = useState<number[]>([]);
 
   useEffect(() => {
@@ -78,5 +78,3 @@ const Chart = () => {
 
   return <Line data={data} />;
 };
-
-export default Chart;

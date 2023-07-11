@@ -13,7 +13,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { ToastContainer, toast } from 'react-toastify';
-import { CaseDetails, comments } from '@/lib/types';
+import { CaseDetails, comments } from '@/types/types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 

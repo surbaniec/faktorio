@@ -21,6 +21,14 @@ const CaseSchema = new Schema({
     type: String,
     required: true,
   },
+  invoiceDate: {
+    type: String,
+    required: true,
+  },
+  dueDate: {
+    type: String,
+    required: true,
+  },
   comments: {
     type: Array,
     required: true,

@@ -26,7 +26,9 @@ export async function POST(request) {
     const image = formData.get('image');
     const name = formData.get('name');
     const msg = formData.get('msg');
-    const date = formData.get('date');
+    const createdAt = formData.get('createdAt');
+    const invoiceDate = formData.get('invoiceDate');
+    const dueDate = formData.get('dueDate');
 
     //Find user
     await connectToDb();
@@ -38,15 +40,17 @@ export async function POST(request) {
       statusType,
       senderId,
       email: user.email,
+      invoiceDate,
+      dueDate,
       comments: [
         {
           image,
           name,
           msg,
-          date,
+          createdAt,
         },
       ],
-      createdAt: date,
+      createdAt,
     });
 
     await newCase.save();

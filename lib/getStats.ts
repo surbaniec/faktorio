@@ -22,10 +22,19 @@ export async function getStats() {
         caseD.statusType === 'zatwierdzono' && caseD.senderId == session.user.id
       );
     });
+
+    const today = new Date();
+
+    const overdueCases = cases.filter(function (caseD: CaseDetails) {
+      const dueDate = new Date(caseD.dueDate);
+      return today > dueDate;
+    });
+
     const stats = {
       cases: cases.length,
       approved: approvedCases.length,
       pending: pendingCases.length,
+      overdue: overdueCases.length,
     };
 
     return stats;

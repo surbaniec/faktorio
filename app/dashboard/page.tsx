@@ -64,7 +64,7 @@ const Dashboard = async () => {
             />
             <Card
               icon={<IoWarningOutline />}
-              number={0}
+              number={stats.overdue}
               text='Płatność przeterminowana'
             />
           </>

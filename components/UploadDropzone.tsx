@@ -40,7 +40,7 @@ export const OurUploadDropzone = ({
           formData.append('fileUrl', res[0].fileUrl);
           formData.append('statusType', 'oczekujące');
           formData.append('senderId', session?.user?.id as string);
-          formData.append('image', JSON.stringify(session?.user?.image));
+          formData.append('image', session?.user?.image!);
           formData.append('name', session?.user?.name as string);
           formData.append('msg', 'Przesłano fakturę.');
           formData.append('createdAt', JSON.stringify(Date.now()));

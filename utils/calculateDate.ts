@@ -1,3 +1,5 @@
+import { CaseDetails } from '@/types/types';
+
 export const calculateDueDate = (
   dateFrom: string,
   daysAmount: number
@@ -15,6 +17,26 @@ export const calculateDueDate = (
   return dueDate;
 };
 
-// export const calculateRemainingDays = () => {
+export const calculateRemainingDays = (cases: CaseDetails[]) => {
+  const today = new Date();
+  const result = {
+    upcomingPayments: 0,
+    overduePayments: 0,
+  };
 
-// }
+  cases.forEach((caseD) => {
+    const dueDate = new Date(caseD.dueDate);
+
+    const difference = Math.floor(
+      (dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    if (difference > 0) {
+      result.upcomingPayments++;
+    } else {
+      result.overduePayments++;
+    }
+  });
+
+  return result;
+};

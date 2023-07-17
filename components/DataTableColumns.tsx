@@ -13,15 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
-
-// This type is used to define the shape of our data.
-export type CaseDetails = {
-  _id: string;
-  invoiceNumber: string;
-  fileUrl: string;
-  statusType: string;
-  senderId: string;
-};
+import { CaseDetails } from '@/types/types';
 
 export const columns: ColumnDef<CaseDetails>[] = [
   {
@@ -45,6 +37,20 @@ export const columns: ColumnDef<CaseDetails>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Email
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: 'dueDate',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Termin płatności
           <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       );

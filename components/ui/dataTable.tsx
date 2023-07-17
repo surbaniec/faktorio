@@ -67,10 +67,10 @@ export function DataTable<TData, TValue>({
     <div className='bg-white border rounded-md px-4 lg:px-8 lg:py-4'>
       <div className='flex items-center py-4 gap-2'>
         <Input
-          placeholder='Filtruj adres email...'
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          placeholder='Filtruj case id...'
+          value={(table.getColumn('_id')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
+            table.getColumn('_id')?.setFilterValue(event.target.value)
           }
           className='max-w-sm focus-visible:outline-indigo-800'
         />

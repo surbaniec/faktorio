@@ -37,6 +37,8 @@ const CaseDetailsPage = () => {
     statusType: '',
     senderId: '',
     email: '',
+    invoiceDate: '',
+    dueDate: '',
     comments: [{ image: '', name: '', msg: '', date: '' }],
     createdAt: '',
   });
@@ -58,6 +60,8 @@ const CaseDetailsPage = () => {
           statusType,
           senderId,
           email,
+          invoiceDate,
+          dueDate,
           comments,
           createdAt,
         } = data;
@@ -69,6 +73,8 @@ const CaseDetailsPage = () => {
           statusType,
           senderId,
           email,
+          invoiceDate,
+          dueDate,
           comments,
           createdAt,
         });
@@ -105,6 +111,8 @@ const CaseDetailsPage = () => {
       statusType: status,
       senderId: caseDetails.senderId,
       email: caseDetails.email,
+      invoiceDate: caseDetails.invoiceDate,
+      dueDate: caseDetails.dueDate,
       comments: [...caseDetails.comments, newComment],
       createdAt: caseDetails.createdAt,
     };
@@ -134,6 +142,8 @@ const CaseDetailsPage = () => {
         statusType: status,
         senderId: caseDetails.senderId,
         email: caseDetails.email,
+        invoiceDate: caseDetails.invoiceDate,
+        dueDate: caseDetails.dueDate,
         comments: [...caseDetails.comments, newComment],
         createdAt: caseDetails.createdAt,
       });

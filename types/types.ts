@@ -5,6 +5,8 @@ export type CaseDetails = {
   statusType: string;
   senderId: string;
   email: string;
+  invoiceDate: string;
+  dueDate: string;
   comments: comments[];
   createdAt: string;
 };

@@ -75,7 +75,7 @@ export const Navbar = () => {
           } block rounded-full w-2 h-2`}
         ></div>
         <div
-          className={`absolute top-[4px] left-[-4px]${
+          className={`absolute top-[4px] left-[-4px] ${
             overdueCasesCount ? 'bg-red-600' : 'bg-green-600'
           } block rounded-full w-2 h-2 animate-ping`}
         ></div>

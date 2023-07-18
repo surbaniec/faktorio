@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { IoMdNotificationsOutline } from 'react-icons/io';
@@ -11,11 +11,50 @@ import {
   HiOutlineCalendar,
 } from 'react-icons/hi';
 import Link from 'next/link';
+import { NotificationsCard } from './NotificationsCard';
 
 export const Navbar = () => {
   // required:true => if there is no session, redirect to log in page
   const { data: session } = useSession({ required: true });
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [upcomingCasesCount, setUpcomingCasesCount] = useState(0);
+  const [overdueCasesCount, setOverdueCasesCount] = useState(0);
+
+  const notificationIconRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const getNotificationCases = async () => {
+      const res = await fetch('/api/case/notification');
+      const data = await res.json();
+      setUpcomingCasesCount(data.upcomingPayment);
+      setOverdueCasesCount(data.overduePayment);
+    };
+    getNotificationCases();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const hidePopups = (e: MouseEvent) => {
+      if (
+        notificationIconRef.current &&
+        !notificationIconRef.current.contains(e.target as Node)
+      ) {
+        setShowNotifications(false);
+      }
+
+      if (imageRef.current && !imageRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('click', hidePopups);
+
+    return () => {
+      document.removeEventListener('click', hidePopups);
+    };
+  }, []);
 
   return (
     <nav className='col-span-full flex justify-between px-4 py-4 shadow-md bg-white'>
@@ -30,19 +69,40 @@ export const Navbar = () => {
         <span className='hidden md:block'>Faktorio</span>
       </h1>
       <div className='flex items-center relative gap-4'>
-        <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2'></div>
-        <div className='absolute top-[4px] left-[-4px] bg-red-600 block rounded-full w-2 h-2 animate-ping'></div>
-        <IoMdNotificationsOutline className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer' />
+        <div
+          className={`absolute top-[4px] left-[-4px] ${
+            overdueCasesCount ? 'bg-red-600' : 'bg-green-600'
+          } block rounded-full w-2 h-2`}
+        ></div>
+        <div
+          className={`absolute top-[4px] left-[-4px]${
+            overdueCasesCount ? 'bg-red-600' : 'bg-green-600'
+          } block rounded-full w-2 h-2 animate-ping`}
+        ></div>
+        <div ref={notificationIconRef}>
+          <IoMdNotificationsOutline
+            className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer'
+            onClick={() => setShowNotifications((prev) => !prev)}
+          />
+          {showNotifications && (
+            <NotificationsCard
+              upcomingCasesCount={upcomingCasesCount}
+              overdueCasesCount={overdueCasesCount}
+            />
+          )}
+        </div>
         <HiOutlineCalendar className='text-3xl md:text-4xl lg:text-3xl text-zinc-500 cursor-pointer' />
         {session?.user && (
-          <Image
-            src={session.user.image!}
-            width={40}
-            height={40}
-            alt='profile'
-            className='rounded-full cursor-pointer'
-            onClick={() => setShowDropdown((prev) => !prev)}
-          />
+          <div ref={imageRef}>
+            <Image
+              src={session.user.image!}
+              width={40}
+              height={40}
+              alt='profile'
+              className='rounded-full cursor-pointer'
+              onClick={() => setShowDropdown((prev) => !prev)}
+            />
+          </div>
         )}
 
         {showDropdown && (

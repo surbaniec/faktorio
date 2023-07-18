@@ -21,7 +21,7 @@ const AddInvoice = () => {
             placeholder='Podaj numer faktury...'
             value={invoiceNumber}
             onChange={(e) => setInvoiceNumber(e.target.value)}
-            className='border rounded-md md:w-1/2 lg:w-1/3 px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600 mt-2'
+            className='border rounded-md md:w-1/2 lg:w-1/3 px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600 mt-2 placeholder:text-current'
             required
           />
         </div>
@@ -30,7 +30,7 @@ const AddInvoice = () => {
           <input
             type='date'
             id='invoiceDate'
-            className='border rounded-md md:w-1/2 lg:w-1/3 px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600 mt-2 text-zinc-400'
+            className='border rounded-md md:w-1/2 lg:w-1/3 px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600 mt-2'
             value={invoiceDate}
             onChange={(e) => setInvoiceDate(e.target.value)}
             required
@@ -44,7 +44,7 @@ const AddInvoice = () => {
             type='number'
             id='invoiceDays'
             placeholder='Podaj termin zapłaty...'
-            className='border rounded-md md:w-1/2 lg:w-1/3 px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600 my-2 text-zinc-400'
+            className='border rounded-md md:w-1/2 lg:w-1/3 px-2 py-2 active:outline-indigo-600 focus:outline-indigo-600 my-2'
             value={invoiceDays}
             onChange={(e) => setInvoiceDays(+e.target.value)}
             min={7}

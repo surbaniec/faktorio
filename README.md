@@ -15,8 +15,13 @@ I didn't want to duplicate another application rewritten from the online course.
 is rarely used in other junior frontends portfolios like blog or e-commerce store and then idea of faktorio came up. Simple invoice app
 where one can create an account, view statistics and charts of company invoices and process them withing app (approve, reject, ask colleagues for
 more info, send to correct approver of costs etc.).
+
 My first trouble started with how to store and retrieve PDF document with invoice in database. Then I figuread out that the best solution
 for me will be uploading PDF to uploadthing.com and then store in database generated download link to this document.
+
+The first version of app with all basic functionality is done but it is only possible to log into one workspace. The second version will 
+let others to create workspace for their company, set up accounts for workers with correct permission i.e admin and upload invoices to
+that one specific company by clients without need to register and login.
 
 ## Technologies
 

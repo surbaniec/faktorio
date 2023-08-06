@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FAKTORIO
 
-## Getting Started
+**Invoice app created in NextJS 13**
 
-First, run the development server:
+## Table of contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Launch](#launch)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## General info
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This is my first personal project in NextJS 13. My main goal was to create my own app in NextJS using all its concepts.
+I didn't want to duplicate another application rewritten from the online course. The challange was to come up with something that
+is rarely used in other junior frontends portfolios like blog or e-commerce store and then idea of faktorio came up. Simple invoice app
+where one can create an account, view statistics and charts of company invoices and process them withing app (approve, reject, ask colleagues for
+more info, send to correct approver of costs etc.).
+My first trouble started with how to store and retrieve PDF document with invoice in database. Then I figuread out that the best solution
+for me will be uploading PDF to uploadthing.com and then store in database generated download link to this document.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies
 
-## Learn More
+- NextJS 13
+- NextAuth
+- MongoDB
+- Mongoose
+- TypeScript
+- TailwindCSS
+- Uploadthing
+- React-pdf
 
-To learn more about Next.js, take a look at the following resources:
+## Launch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To run this project, visit [https://faktorio.vercel.app/](https://faktorio.vercel.app/) and log in to your google account.

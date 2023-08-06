@@ -15,5 +15,5 @@ export type comments = {
   image: string;
   name: string;
   msg: string;
-  date: string;
+  createdAt: string;
 };

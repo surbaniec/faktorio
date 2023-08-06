@@ -39,7 +39,7 @@ const CaseDetailsPage = () => {
     email: '',
     invoiceDate: '',
     dueDate: '',
-    comments: [{ image: '', name: '', msg: '', date: '' }],
+    comments: [{ image: '', name: '', msg: '', createdAt: '' }],
     createdAt: '',
   });
 
@@ -101,7 +101,7 @@ const CaseDetailsPage = () => {
       image: session.user.image!.toString(),
       name: session.user.name!.toString(),
       msg: message,
-      date: Date.now().toString(),
+      createdAt: Date.now().toString(),
     };
 
     const editedCase: CaseDetails = {
@@ -250,7 +250,7 @@ const CaseDetailsPage = () => {
                       <p className='font-medium'>{comment.name}</p>
                       <span className='text-zinc-500'>{comment.msg}</span>
                       <span className='text-xs text-zinc-400 ml-2'>
-                        {new Date(+comment.date).toLocaleDateString()}
+                        {new Date(+comment.createdAt).toLocaleDateString()}
                       </span>
                     </div>
                   </div>

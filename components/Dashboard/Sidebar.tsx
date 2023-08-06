@@ -119,7 +119,9 @@ export const Sidebar = () => {
           </li>
           <li
             className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
-              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+              pathname === '/dashboard/calendar'
+                ? 'bg-indigo-800 text-white'
+                : ''
             }`}
           >
             <Link href='' className='flex items-center'>
@@ -129,7 +131,9 @@ export const Sidebar = () => {
           </li>
           <li
             className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
-              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+              pathname === '/dashboard/profile'
+                ? 'bg-indigo-800 text-white'
+                : ''
             }`}
           >
             <Link href='' className='flex items-center'>
@@ -138,7 +142,9 @@ export const Sidebar = () => {
           </li>
           <li
             className={`hover:bg-indigo-700 hover:text-white rounded-md px-4 py-2 duration-200 ${
-              pathname === '/dashboard/search' ? 'bg-indigo-800 text-white' : ''
+              pathname === '/dashboard/settings'
+                ? 'bg-indigo-800 text-white'
+                : ''
             }`}
           >
             <Link href='' className='flex items-center'>
